@@ -14,7 +14,11 @@ require('laravel-elixir-vue');
  */
 
 elixir(mix => {
+    mix.copy('node_modules/simplemde/dist/simplemde.min.js', 'resources/assets/js')
+        .copy('node_modules/simplemde/dist/simplemde.min.css', 'resources/assets/css');
+
     mix.sass('app.scss')
-        .webpack('app.js')
-        .version('css/app.css');
+        .copy('resources/assets/js', 'public/js')
+        .copy('resources/assets/css', 'public/css')
+        .webpack('app.js');
 });
