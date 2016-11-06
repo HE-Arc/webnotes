@@ -54,17 +54,17 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8',
-            'collation' => 'utf8_unicode_ci',
+            'host' => env('MYSQL_HOST', env('DB_HOST', 'localhost')),
+            'port' => env('MYSQL_PORT', env('DB_PORT', '3306')),
+            'database' => env('MYSQL_USERNAME', env('DB_DATABASE', 'forge')),
+            'username' => env('MYSQL_USERNAME', env('DB_USERNAME', 'forge')),
+            'password' => env('MYSQL_PASSWORD', env('DB_PASSWORD', '')),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
-            'strict' => true,
-            'engine' => null,
+            'strict' => false
         ],
+
 
         'pgsql' => [
             'driver' => 'pgsql',
