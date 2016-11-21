@@ -22,7 +22,7 @@ class AccountController extends Controller
 
     public function viewAccount(){
 
-        $title = 'Compte';
+        $title = 'Account';
 
         return view ('accounts/account', ['title' => $title]);
     }
