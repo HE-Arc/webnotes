@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNotesReleasesTable extends Migration
+class CreateGroupsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class CreateNotesReleasesTable extends Migration
      */
     public function up()
     {
-        Schema::create('notes_releases', function (Blueprint $table) {
+        Schema::create('groups', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
+            $table->string('name', 250)->unique();
             $table->string('description');
-            $table->longText('content');
-            $table->string('auteur');
+            $table->string('icon');
             $table->timestamps();
-            $table->integer('note_id')->unsigned();
-            $table->foreign('note_id')->references('id')->on('notes');
         });
     }
 
@@ -32,6 +29,6 @@ class CreateNotesReleasesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('notes_releases');
+        Schema::drop('groups');
     }
 }
