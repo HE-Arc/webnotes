@@ -18,3 +18,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::get('/notetest', 'NotesController@test');
+
+Route::get('/welcome', 'PagesController@index');
+
+Route::get('/account', 'AccountController@viewAccount');
