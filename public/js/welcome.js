@@ -6,7 +6,7 @@
 
 // jQuery to collapse the navbar on scroll
 function collapseNavbar() {
-    if ($(".navbar").offset().top > 50) {
+    if ($(".navbar").offset().top > $("body").height()) {
         $(".navbar-fixed-top").removeClass("top-nav-increase");
     } else {
         $(".navbar-fixed-top").addClass("top-nav-increase");

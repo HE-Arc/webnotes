@@ -39,8 +39,8 @@
     <section id="about" class="container content-section text-center">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
-                <h2>About</h2>
-                <p>Principium autem unde latius se funditabat, emersit ex negotio tali. Chilo ex vicario et coniux eius Maxima nomine, questi apud Olybrium ea tempestate urbi praefectum, vitamque suam venenis petitam adseverantes inpetrarunt ut hi, quos suspectati sunt, ilico rapti conpingerentur in vincula, organarius Sericus et Asbolius palaestrita et aruspex Campensis.</p>
+                <h2>A Propos</h2>
+                <p>Durant les études, il n’est pas rare d’avoir besoin de partager ces notes avec ces camarades ou tout du moins une partie d’entre eux. Nous basant sur ce principe il peut être intéressant également pour un professeur, ou un étudiant de vouloir partager ces cours. Il serait donc intéressant de pouvoir partager l’écran de l’application en deux permettant ainsi d’afficher le cours à côté de nos notes.</p>
             </div>
         </div>
     </section>
@@ -49,13 +49,16 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>Contact</h2>
-                <p>Principium autem unde latius se funditabat, emersit ex negotio tali. Chilo ex vicario et coniux eius Maxima nomine, questi apud Olybrium ea tempestate urbi praefectum, vitamque suam venenis petitam adseverantes inpetrarunt ut hi, quos suspectati sunt, ilico rapti conpingerentur in vincula, organarius Sericus et Asbolius palaestrita et aruspex Campensis.</p>
+                <a href="mailto:steve.nadalin@he-arc.ch" target="_blank">Nadalin Steve</a><br>
+                <a href="mailto:nicolas.sommer@he-arc.ch" target="_blank">Sommer Nicola</a><br>
+                <a href="mailto:daniel.rodrigueslourenco@he-arc.ch" target="_blank">Rodrigues Lourenço Daniel</a><br>
+                <a href="http://www.he-arc.ch/" target="_blank">HE-Arc Ingénierie, Neuchâtel</a><br><br>
                 <ul class="list-inline banner-social-buttons">
                     <li>
                         <a href="https://github.com/HE-Arc/webnotes" class="btn btn-default btn-lg" target="_blank"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
                     </li>
                 </ul>
-            </div>
+            </di>
         </div>
     </section>
 
