@@ -22,3 +22,6 @@ Route::get('/notetest', 'NotesController@test');
 Route::get('/welcome', 'PagesController@index');
 
 Route::get('/account', 'AccountController@viewAccount');
+
+
+Route::resource('apiAccount', 'ApiAccountController');

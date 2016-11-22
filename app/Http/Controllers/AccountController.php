@@ -16,10 +16,6 @@ class AccountController extends Controller
         $this->middleware('auth');
     }
 
-    public function testAccount(){
-        return view('notes.note');
-    }
-
     public function viewAccount(){
 
         $title = 'Account';
