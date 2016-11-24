@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserNoteTable extends Migration
+class CreateGroupUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateUserNoteTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_note', function (Blueprint $table) {
+        Schema::create('group_user', function (Blueprint $table) {
             $table->integer('user_id')->unsigned();
-            $table->integer('note_id')->unsigned();
+            $table->integer('group_id')->unsigned();
             $table->integer('permission');
-            $table->primary(['user_id', 'note_id']);
+            $table->primary(['user_id', 'group_id']);
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('note_id')->references('id')->on('notes');
+            $table->foreign('group_id')->references('id')->on('groups');
         });
     }
 
@@ -30,6 +30,6 @@ class CreateUserNoteTable extends Migration
      */
     public function down()
     {
-        Schema::drop('user_note');
+        Schema::drop('group_user');
     }
 }
