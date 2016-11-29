@@ -23,5 +23,19 @@ Route::get('/welcome', 'PagesController@index');
 
 Route::get('/account', 'AccountController@viewAccount');
 
+// Group of routes for GROUP
+Route::group(array('prefix' => 'group/'), function()
+{
+    Route::get('', 'GroupsController@index');
+    Route::get('create', 'GroupsController@create');
+    Route::post('', 'GroupsController@store');
+    Route::get('{group}', 'GroupsController@show');
+});
+
+// Group of routes for the API versioning
+Route::group(array('prefix' => 'api'), function()
+{
+    Route::resource('/group', 'ApiGroupsController@index');
+});
 
 Route::resource('apiAccount', 'ApiAccountController');
