@@ -7688,8 +7688,13 @@ button.close {
   }
 }
 
-.table > tbody > tr > td {
-  vertical-align: middle;
+#group-input-icon-edit {
+  display: none;
+}
+
+#group-icon-edit:hover {
+  cursor: pointer;
+  opacity: 0.7;
 }
 
 /*# sourceMappingURL=app.css.map */

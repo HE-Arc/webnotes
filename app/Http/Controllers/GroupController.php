@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 
 use WebNote\Http\Requests;
 
-class ApiGroupsController extends Controller
+use WebNote;
+
+use WebNote\Group;
+
+class GroupController extends Controller
 {
     public function __construct()
     {
@@ -20,7 +24,8 @@ class ApiGroupsController extends Controller
      */
     public function index()
     {
-        //
+        $groups = WebNote\Group::all();
+        return view('groups.index', compact('groups'));
     }
 
     /**
@@ -30,7 +35,9 @@ class ApiGroupsController extends Controller
      */
     public function create()
     {
-        //
+        $title = "Nouveau groupe";
+        $group = new Group();
+        return view('groups.createOrEdit', compact('group', 'title'));
     }
 
     /**
@@ -47,12 +54,12 @@ class ApiGroupsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param $group
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Group $group)
     {
-        //
+        return view('groups.show', compact('group'));
     }
 
     /**
@@ -63,7 +70,9 @@ class ApiGroupsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = "Edition du groupe";
+        $group = WebNote\Group::find($id);
+        return view('groups.createOrEdit', compact('group', 'title'));
     }
 
     /**
