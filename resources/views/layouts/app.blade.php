@@ -51,23 +51,22 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a class="page-scroll" href="{{ url('/#about') }}" >About</a></li>
-                    <li><a class="page-scroll" href="{{ url('/#contact') }}" class="page-scroll">Contact</a></li>
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
+                        <li><a href="{{ url('/login') }}">Connexion</a></li>
+                        <li><a href="{{ url('/register') }}">Inscription</a></li>
                     @else
+                        <li><a href="{{ url('/notetest') }}">Nouvelle note</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a href="{{ url('/welcome') }}">Home</a>
-                                    <a href="{{ url('/account') }}">My account</a>
-                                    <a href="{{ url('/notetest') }}">Create a new note</a>
-                                    <a href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
+                                    <a href="{{ url('/welcome') }}">Accueil</a>
+                                    <a href="{{ url('/account') }}">Mon compte</a>
+                                    <a href="{{ url('/group') }}">Mes groupes</a>
+                                    <a href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Déconnexion</a>
                                     <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                     </form>

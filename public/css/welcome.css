@@ -4,13 +4,7 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 body {
-  width: 100%;
-  height: 100%;
   color: #fff;
-}
-html {
-  width: 100%;
-  height: 100%;
 }
 h1,
 h2,
@@ -45,23 +39,9 @@ a:focus {
   text-decoration: none;
   color: #fff;
 }
+.navbar {
+  margin-bottom: 0;
 
-@media (min-width: 768px) {
-  .top-nav-increase .navbar-nav>li>a{
-    color: white;
-  }
-  .top-nav-increase .navbar-brand{
-    color: white;
-  }
-  .top-nav-increase a:hover,
-  .top-nav-increase a:active{
-    color: white;
-  }
-  .top-nav-increase{
-    background: #2c3e50;
-    border: none;
-    transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
-  }
 }
 .intro {
   display: table;
@@ -70,16 +50,12 @@ a:focus {
   padding: 100px 0;
   text-align: center;
   /*color: #333;*/
-  background: linear-gradient(rgba(44, 62, 80, 0.5)0%, rgba(44, 62, 80, 0.6)80%, rgba(44, 62, 80, 1.0)100%), url(/img/desk-laptop-notebook-pen.jpg) no-repeat bottom center scroll;
   background-color: #f5f8fa;
+  background: linear-gradient(rgba(44, 62, 80, 0.5)0%, rgba(44, 62, 80, 0.5)50%, rgba(44, 62, 80, 1.0)100%), url(/img/desk-laptop-notebook-pen.jpg) no-repeat bottom center scroll;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
-}
-.intro .intro-body {
-  display: table-cell;
-  vertical-align: middle;
 }
 .intro .intro-body .brand-heading {
   font-size: 40px;
@@ -90,7 +66,6 @@ a:focus {
 @media (min-width: 768px) {
   .intro {
     height: 100%;
-    padding: 0;
   }
   .intro .intro-body .brand-heading {
     font-size: 100px;
@@ -98,41 +73,6 @@ a:focus {
   .intro .intro-body .intro-text {
     font-size: 26px;
   }
-}
-.btn-circle {
-  width: 70px;
-  height: 70px;
-  margin-top: 15px;
-  padding: 7px 16px;
-  border: 2px solid #777;
-  border-radius: 100% !important;
-  font-size: 40px;
-  color: #777;
-  background: transparent;
-  -webkit-transition: background 0.3s ease-in-out;
-  -moz-transition: background 0.3s ease-in-out;
-  transition: background 0.3s ease-in-out;
-}
-.btn-circle:hover,
-.btn-circle:focus {
-  outline: none;
-  color: #777;
-}
-.btn-circle i.animated {
-  -webkit-transition-property: -webkit-transform;
-  -webkit-transition-duration: 1s;
-  -moz-transition-property: -moz-transform;
-  -moz-transition-duration: 1s;
-}
-.btn-circle:hover i.animated {
-  -webkit-animation-name: pulse;
-  -moz-animation-name: pulse;
-  -webkit-animation-duration: 1.5s;
-  -moz-animation-duration: 1.5s;
-  -webkit-animation-iteration-count: infinite;
-  -moz-animation-iteration-count: infinite;
-  -webkit-animation-timing-function: linear;
-  -moz-animation-timing-function: linear;
 }
 @-webkit-keyframes pulse {
   0% {
