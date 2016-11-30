@@ -16,3 +16,12 @@ use Illuminate\Http\Request;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
+
+
+// Group of routes for the API versioning
+Route::group(array('prefix' => 'api'), function()
+{
+    Route::resource('/group', 'ApiGroupsController@index');
+});
+
+Route::resource('apiAccount', 'ApiAccountController');

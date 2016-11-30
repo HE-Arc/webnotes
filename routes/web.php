@@ -32,10 +32,3 @@ Route::group(array('prefix' => 'group/'), function()
     Route::get('{group}', 'GroupsController@show');
 });
 
-// Group of routes for the API versioning
-Route::group(array('prefix' => 'api'), function()
-{
-    Route::resource('/group', 'ApiGroupsController@index');
-});
-
-Route::resource('apiAccount', 'ApiAccountController');
