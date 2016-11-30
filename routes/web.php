@@ -21,7 +21,14 @@ Route::get('/notetest', 'NotesController@test');
 
 Route::get('/welcome', 'PagesController@index');
 
-Route::get('/account', 'AccountController@viewAccount');
+Route::group(array('prefix' => 'account/'), function(){
+    Route::get('', 'AccountController@viewAccount');
+    Route::get('/accountSettings', 'AccountController@accountSettings');
+    Route::get('/overview', 'AccountController@overview');
+    Route::get('/delete', 'AccountController@deleteAccount');
+    Route::get('/help', 'AccountController@getHelp');
+});
+
 
 // Group of routes for GROUP
 Route::group(array('prefix' => 'group/'), function()
