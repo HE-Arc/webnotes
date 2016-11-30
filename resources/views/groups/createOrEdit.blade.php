@@ -13,7 +13,7 @@
             <form class="form-horizontal" action="{{url("/group")}}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="panel-heading">
-                    <h1> {{ $title }}</h1>
+                    <h1>{{ $title }}</h1>
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -21,22 +21,22 @@
                             <!-- Icon file button -->
                             <div class="form-group" style="text-align: center;">
                                 <div class="input-group-btn">
-                                    <img src="{{ Storage::url('groups_icon/group_default.png') }}" alt="Group Icon" class="img-circle" title="Cliquer pour changer d'image" width="150" height="150">
-                                    <input id="icon" name="icon" class="input-file" type="file" accept="image/png, image/jpeg, image/gif"/>
+                                    <img id="group-icon-edit" src="{{ Storage::url('groups_icon/group_default.png') }}" alt="Group Icon" class="img-circle" title="Cliquer pour changer d'image" width="150" height="150">
+                                    <input id="group-input-icon-edit" name="icon" class="input-file" type="file" accept="image/png, image/jpeg, image/gif"/>
                                 </div>
                             </div>
                             <!-- Name text input-->
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="name">Nom du groupe</label>
                                 <div class="col-md-5">
-                                    <input id="name" name="name" type="text" placeholder="Nom" class="form-control input-md" required="">
+                                    <input id="name" name="name" type="text" placeholder="Nom" class="form-control input-md" required="" value="{{ $group->name }}">
                                 </div>
                             </div>
                             <!-- Description textarea -->
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="description">Description</label>
                                 <div class="col-md-5">
-                                    <textarea class="form-control " id="description" name="description">Description...</textarea>
+                                    <textarea class="form-control " id="description" name="description">{{ $group->description }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -49,20 +49,11 @@
                                     <input id="searchMember" name="searchMember" type="search" placeholder="Nom de l'utilisateur" class="form-control input-md">
                                 </div>
                             </div>
-                            <div class="table-responsive">
-                                <table class="table table-stripped">
-                                    <tr>
-                                        <td>avatar</td>
-                                        <td>Name</td>
-                                        <td class="text-right"><span class="remove glyphicon glyphicon-remove" aria-hidden="true"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>avatar</td>
-                                        <td>Name</td>
-                                        <td class="text-right"><span class="remove glyphicon glyphicon-remove" aria-hidden="true"></span></td>
-                                    </tr>
-                                </table>
-                            </div>
+                            <select multiple class="form-control">
+                                @foreach($group->members as $member)
+                                    <option value="{{ $member->id }}">{{ $member->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -80,19 +71,11 @@
     </div>
     <script>
         $(function() {
-            $("#icon").hide();
-            $('.img-circle').css( 'cursor', 'pointer' );
-            $('.img-circle').mouseenter(function(){
-                $(this).css('opacity', '0.7');
-            });
-            $('.img-circle').mouseleave(function(){
-                $(this).css('opacity', '1.0');
-            });
-            $(".img-circle").click(function () {
-                $(".input-group-btn input:file").click();
+            $("#group-icon-edit").click(function () {
+                $("#group-input-icon-edit input:file").click();
             });
             // Create the preview image
-            $(".input-group-btn input:file").change(function (){
+            $("#group-input-icon-edit input:file").change(function (){
                 var img = $('.img-circle');
                 var file = this.files[0];
                 var reader = new FileReader();
@@ -101,11 +84,6 @@
                     img.attr('src', e.target.result);
                 }
                 reader.readAsDataURL(file);
-            });
-
-            $('.remove').css( 'cursor', 'pointer' );
-            $('.remove').click(function(){
-                $(this).closest('tr').remove();
             });
         });
     </script>

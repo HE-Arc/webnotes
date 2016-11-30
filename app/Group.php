@@ -18,12 +18,12 @@ class Group extends Model
 
     public function path()
     {
-        return "/group/" . $this->id;
+        return route('group.show', ['id' => $this->id]);
     }
 
     public function members()
     {
-        return $this->belongsToMany('WebNote\User')->orderBy('name');
+        return $this->belongsToMany('WebNote\User');
     }
 
     public function notes()
