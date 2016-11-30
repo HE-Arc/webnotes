@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         //$this->call('NoteUserTableSeeder');
         //$this->call('NoteReleasesTableSeeder');
         //$this->call('GroupTableSeeder');
-        $this->call('GroupNoteTableSeeder');
+        //$this->call('GroupNoteTableSeeder');
+        $this->call('GroupUserTableSeeder');
     }
 }
