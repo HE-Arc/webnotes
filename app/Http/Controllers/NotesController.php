@@ -14,21 +14,13 @@ class NotesController extends Controller
     }
 
     /**
-     * Test formulaire de création !!! - DRL
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function test() {
-        return view('notes.note');
-    }
-
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        return view('notes.myNotes');
     }
 
     /**
@@ -38,7 +30,7 @@ class NotesController extends Controller
      */
     public function create()
     {
-        //
+        return view('notes.note');
     }
 
     /**

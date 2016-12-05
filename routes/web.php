@@ -17,8 +17,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/notetest', 'NotesController@test');
-
 Route::get('/welcome', 'PagesController@index');
 
 Route::get('/account', 'AccountController@viewAccount');
@@ -32,3 +30,11 @@ Route::group(array('prefix' => 'group/'), function()
     Route::get('{group}', 'GroupsController@show');
 });
 
+// Group of routes for NOTES
+Route::group(array('prefix' => 'notes/'), function()
+{
+    Route::get('', 'NotesController@index');
+    Route::get('create', 'NotesController@create');
+    Route::post('', 'NotesController@store');
+    Route::get('{group}', 'NotesController@show');
+});

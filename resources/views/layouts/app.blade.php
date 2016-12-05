@@ -56,7 +56,7 @@
                         <li><a href="{{ url('/login') }}">Connexion</a></li>
                         <li><a href="{{ url('/register') }}">Inscription</a></li>
                     @else
-                        <li><a href="{{ url('/notetest') }}">Nouvelle note</a></li>
+                        <li><a href="{{ url('/notes/create') }}">Nouvelle note</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>
@@ -66,6 +66,7 @@
                                     <a href="{{ url('/welcome') }}">Accueil</a>
                                     <a href="{{ url('/account') }}">Mon compte</a>
                                     <a href="{{ url('/group') }}">Mes groupes</a>
+                                    <a href="{{ url('/notes') }}">Mes notes</a>
                                     <a href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Déconnexion</a>
                                     <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
