@@ -7688,6 +7688,7 @@ button.close {
   }
 }
 
+/* GROUP EDIT PAGE */
 #group-input-icon-edit {
   display: none;
 }
@@ -7695,6 +7696,25 @@ button.close {
 #group-icon-edit:hover {
   cursor: pointer;
   opacity: 0.7;
+}
+
+/* GROUP PROFILE PAGE */
+.group-profile .panel-heading {
+  text-align: center;
+}
+
+.group-profile .panel-body {
+  padding: 0;
+}
+
+.group-profile .panel-body .btn-pref button {
+  border-radius: 0px;
+}
+
+.group-profile .panel-body .well {
+  border: none;
+  border-radius: 0px;
+  background-color: transparent;
 }
 
 /*# sourceMappingURL=app.css.map */

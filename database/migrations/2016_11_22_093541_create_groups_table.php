@@ -17,7 +17,7 @@ class CreateGroupsTable extends Migration
             $table->increments('id');
             $table->string('name', 100)->unique();
             $table->string('description');
-            $table->string('icon');
+            $table->string('icon')->default('groups_icon/group_default.png');
             $table->timestamps();
         });
     }

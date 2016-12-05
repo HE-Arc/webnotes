@@ -17,12 +17,12 @@
                 </h1>
             </div>
             <div class="panel-body">
-                @if(count($groups) > 0)
+                @if(count($user->groups) > 0)
                     <ul class="media-list">
-                        @foreach($groups as $group)
+                        @foreach($user->groups as $group)
                                 <li class="media">
                                     <div class="media-left">
-                                        <img src="{{ $group->icon }}" alt="{{ $group->name }} Icon" class="img-circle" width="60" height="60">
+                                        <img src="{{ Storage::disk('public')->url($group->icon) }}" alt="{{ $group->name }} Icon" class="img-circle" width="60" height="60">
                                     </div>
                                     <div class="media-body">
                                         <h4 class="media-heading">
