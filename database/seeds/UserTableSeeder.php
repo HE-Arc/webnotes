@@ -15,7 +15,6 @@ class UsersTableSeeder extends Seeder {
                     'name' => 'steve',
                     'email' => 'steve.nadalin@he-arc.ch',
                     'password' => bcrypt('root'),
-                    'avatar' => '',
                     'remember_token' => '',
                     'created_at' => '2016-12-03 12:11:11',
                     'updated_at' => '2016-12-03 19:11:11'
@@ -26,7 +25,6 @@ class UsersTableSeeder extends Seeder {
                   'name' => 'daniel',
                   'email' => 'daniel.rodrigues@he-arc.ch',
                   'password' => bcrypt('root'),
-                  'avatar' => '',
                   'remember_token' => '',
                   'created_at' => '2016-12-03 12:12:11',
                   'updated_at' => '2016-12-03 19:12:11'
@@ -37,7 +35,6 @@ class UsersTableSeeder extends Seeder {
                   'name' => 'nicolas',
                   'email' => 'nicolas.sommer@he-arc.ch',
                   'password' => bcrypt('root'),
-                  'avatar' => '',
                   'remember_token' => '',
                   'created_at' => '2016-12-03 12:13:11',
                   'updated_at' => '2016-12-03 19:13:11'
