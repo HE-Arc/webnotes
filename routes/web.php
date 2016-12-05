@@ -27,7 +27,6 @@ Route::group(array('prefix' => 'account/'), function(){
     Route::get('/help', 'AccountController@getHelp');
 });
 
-<<<<<<< HEAD
 // Group of routes for NOTES
 Route::group(array('prefix' => 'notes/'), function()
 {
@@ -36,8 +35,5 @@ Route::group(array('prefix' => 'notes/'), function()
     Route::post('', 'NotesController@store');
     Route::get('{group}', 'NotesController@show');
 });
-=======
 
 Route::resource('/group', 'GroupController');
-
->>>>>>> 04c39d231c6fb7e9a10a0447f17b7895c62acbc2
