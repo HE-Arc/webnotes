@@ -4,7 +4,7 @@ body {
 
 /* Profile container */
 .profile {
-    margin: 20px 0;
+    margin: 10px 0;
 }
 
 /* Profile sidebar */
@@ -16,7 +16,7 @@ body {
 .profile-userpic img {
     float: none;
     margin: 0 auto;
-    width: 50%;
+    width: 75%;
     height: 50%;
     -webkit-border-radius: 50% !important;
     -moz-border-radius: 50% !important;
