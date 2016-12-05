@@ -18,3 +18,28 @@ Vue.component('example', require('./components/Example.vue'));
 const app = new Vue({
     el: 'body'
 });
+
+$(function() {
+    /* GROUP EDITION PAGE */
+    $("#group-icon-edit").click(function () {
+        $("#group-input-icon-edit").click();
+    });
+    // Create the preview image
+    $("#group-input-icon-edit").change(function (){
+        var img = $('#group-icon-edit');
+        var file = this.files[0];
+        var reader = new FileReader();
+        // Set preview image into the popover data-content
+        reader.onload = function (e) {
+            img.attr('src', e.target.result);
+        }
+        reader.readAsDataURL(file);
+    });
+
+    /* GROUP PROFILE PAGE */
+    $(".group-profile .btn-pref .btn").click(function () {
+        $(".group-profile .btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
+        // $(".tab").addClass("active"); // instead of this do the below
+        $(this).removeClass("btn-default").addClass("btn-primary");
+    });
+});

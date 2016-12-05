@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use WebNote\Http\Requests;
 
-class ApiGroupsController extends Controller
+class ApiGroupController extends Controller
 {
     public function __construct()
     {

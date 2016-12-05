@@ -21,7 +21,7 @@ Route::get('/user', function (Request $request) {
 // Group of routes for the API versioning
 Route::group(array('prefix' => 'api'), function()
 {
-    Route::resource('/group', 'ApiGroupsController@index');
+    Route::resource('/group', 'ApiGroupController@index');
 });
 
 Route::resource('apiAccount', 'ApiAccountController');

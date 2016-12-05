@@ -10,10 +10,11 @@
 @section('content')
     <div class="container">
         <div class="panel panel-default">
-            <form class="form-horizontal" action="{{ url("/group") }}" method="post" enctype="multipart/form-data">
+            <form class="form-horizontal" action="{{ url("/group/".$group->id) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
+                {{ method_field('PATCH') }}
                 <div class="panel-heading">
-                    <h1>{{ $title }}</h1>
+                    <h1>{{ $title." ".$group->name }}</h1>
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -21,7 +22,7 @@
                             <!-- Icon file button -->
                             <div class="form-group" style="text-align: center;">
                                 <div class="input-group-btn">
-                                    <img id="group-icon-edit" src="{{ Storage::disk('public')->url('groups_icon/group_default.png') }}" alt="Group Icon" class="img-circle" title="Cliquer pour changer d'image" width="150" height="150">
+                                    <img id="group-icon-edit" src="{{ Storage::disk('public')->url($group->icon) }}" alt="Group Icon" class="img-circle" title="Cliquer pour changer d'image" width="150" height="150">
                                     <input id="group-input-icon-edit" name="icon" class="input-file" type="file" accept="image/png, image/jpeg, image/gif"/>
                                 </div>
                             </div>
@@ -29,14 +30,14 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="name">Nom du groupe</label>
                                 <div class="col-md-5">
-                                    <input id="name" name="name" type="text" placeholder="Nom" class="form-control input-md" required=""/>
+                                    <input id="name" name="name" type="text" placeholder="Nom" class="form-control input-md" required="" value="{{ $group->name }}">
                                 </div>
                             </div>
                             <!-- Description textarea -->
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="description">Description</label>
                                 <div class="col-md-5">
-                                    <textarea class="form-control " id="description" name="description">Description...</textarea>
+                                    <textarea class="form-control " id="description" name="description">{{ $group->description }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -50,6 +51,9 @@
                                 </div>
                             </div>
                             <select multiple class="form-control" name="members">
+                                @foreach($group->members as $member)
+                                    <option value="{{ $member->id }}">{{ $member->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -59,7 +63,7 @@
                     <div class="form-group text-right">
                         <div class="col-md-12">
                             <button id="save" name="save" class="btn btn-primary">Sauvegarder</button>
-                            <a class="btn btn-default" href="{{ url('/group') }}" role="button">Annuler</a>
+                            <a class="btn btn-default" href="{{ url($group->path()) }}" role="button">Annuler</a>
                         </div>
                     </div>
                 </div>

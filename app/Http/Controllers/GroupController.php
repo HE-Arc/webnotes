@@ -4,13 +4,16 @@ namespace WebNote\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\DomCrawler\AbstractUriElement;
 use WebNote\Http\Requests;
 
 use WebNote;
 
 use WebNote\Group;
 
-class GroupsController extends Controller
+class GroupController extends Controller
 {
     public function __construct()
     {
@@ -24,8 +27,8 @@ class GroupsController extends Controller
      */
     public function index()
     {
-        $groups = WebNote\Group::all();
-        return view('groups.index', compact('groups'));
+        $user = Auth::user();
+        return view('groups.index', compact('user'));
     }
 
     /**
@@ -47,7 +50,14 @@ class GroupsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $group = new Group($request->all());
+        if($request->file('icon') != null) {
+            $icon = $request->file('icon')->store('groups_icon', 'public');
+            $group->icon = $icon;
+        }
+        $group->save();
+
+        return redirect('/group');
     }
 
     /**
@@ -69,7 +79,9 @@ class GroupsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = "Edition du groupe";
+        $group = WebNote\Group::find($id);
+        return view('groups.edit', compact('group', 'title'));
     }
 
     /**
@@ -81,7 +93,14 @@ class GroupsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $group = WebNote\Group::find($id);
+        $group->update($request->all());
+        $icon = $request->file('icon')->store('groups_icon', 'public');
+        $group->icon = $icon;
+        $group->save();
+
+
+        return redirect($group->path());
     }
 
     /**
