@@ -31,4 +31,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('WebNote\Group');
     }
+
+    public function notes()
+    {
+        return $this->belongsToMany('WebNote\Note');
+    }
 }

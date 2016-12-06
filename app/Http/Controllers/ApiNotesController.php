@@ -9,16 +9,8 @@ use Illuminate\Support\Facades\Storage;
 use Symfony\Component\DomCrawler\AbstractUriElement;
 use WebNote\Http\Requests;
 
-use WebNote;
-
-use WebNote\Note;
-class NotesController extends Controller
+class ApiNotesController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth', ['except' => 'logout']);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -26,8 +18,7 @@ class NotesController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        return view('notes.myNotes',compact('user'));
+        //
     }
 
     /**
@@ -37,7 +28,7 @@ class NotesController extends Controller
      */
     public function create()
     {
-        return view('notes.note');
+        //
     }
 
     /**
@@ -48,14 +39,7 @@ class NotesController extends Controller
      */
     public function store(Request $request)
     {
-        $note = new Note($request->all());
-        if($request->file('avatar') != null) {
-            $avatar = $request->file('avatar')->store('users_avatar', 'public');
-            $note->avatar = $avatar;
-        }
-        $note->save();
-
-        return redirect('/notes');
+        //
     }
 
     /**
@@ -64,9 +48,9 @@ class NotesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Note $note)
+    public function show($id)
     {
-        return view('notes.showNote', compact('note'));
+        //
     }
 
     /**
