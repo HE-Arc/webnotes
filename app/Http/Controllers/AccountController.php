@@ -19,9 +19,6 @@ class AccountController extends Controller
     }
 
     public function viewAccount(){
-
-        $title = 'Account';
-
         return view ('accounts/account');
     }
 
@@ -30,7 +27,7 @@ class AccountController extends Controller
     }
 
     public function overview(){
-        return "Overview";
+        return view('accounts/accountOverview');
     }
 
     public function deleteAccount(){

@@ -21,10 +21,10 @@ Route::get('/welcome', 'PagesController@index');
 
 Route::group(array('prefix' => 'account/'), function(){
     Route::get('', 'AccountController@viewAccount');
-    Route::get('/accountSettings', 'AccountController@accountSettings');
-    Route::get('/overview', 'AccountController@overview');
-    Route::get('/delete', 'AccountController@deleteAccount');
-    Route::get('/help', 'AccountController@getHelp');
+    Route::get('accountSettings', 'AccountController@accountSettings');
+    Route::get('overview', 'AccountController@overview');
+    Route::get('delete', 'AccountController@deleteAccount');
+    Route::get('help', 'AccountController@getHelp');
 });
 
 Route::resource('/notes', 'NotesController');
