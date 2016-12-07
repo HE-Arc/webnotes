@@ -23,7 +23,7 @@
                                 <li class="media">
                                     <div class="media-body">
                                         <h4 class="media-heading">
-                                            <a href="{{ url($note->path()) }}" role="button">{{ $note->title }}</a>
+                                            <a href="{{ route('notes.show', $note) }}" role="button">{{ $note->title }}</a>
                                         </h4>
                                         {{ $note->description }}
                                     </div>
