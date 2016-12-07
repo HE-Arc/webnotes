@@ -28,5 +28,5 @@ Route::group(array('prefix' => 'account/'), function(){
 });
 
 Route::resource('/notes', 'NotesController');
-
+Route::get('/releases', 'NoteReleasesController@store');
 Route::resource('/group', 'GroupController');

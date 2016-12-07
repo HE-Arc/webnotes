@@ -13,12 +13,12 @@ class NoteRelease extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'description', 'content', 'auteur', 'updated_at'
+        'title', 'description', 'content', 'auteur', 'note_id'
     ];
 
     public function path()
     {
-        return route('notes.show', ['id' => $this->id]);
+        
     }
 
     public function members()
