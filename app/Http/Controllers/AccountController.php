@@ -10,6 +10,8 @@ namespace WebNote\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+use WebNote;
+use WebNote\User;
 
 class AccountController extends Controller
 {
@@ -39,6 +41,26 @@ class AccountController extends Controller
     }
 
     public function update(Request $request, $id){
+        $user = WebNote\User::find($id);
+        $inputs = array_filter($request->except(['_token']));
+        $user->update($inputs);
+        $icon = $request->file('avatar');
+        if($icon != null){
+            $icon->store('users_avatar', 'public');
+            $user->avatar = $icon;
+        }
+        $user->save();
 
+        /*if($request->name != null){
+            $notes = WebNote\user()->notes();
+            foreach($notes as $element){
+                $element->auteur = $request->name;
+                $element->save();
+            }
+        }*/
+
+
+        return redirect('account/');
+        //return $request->file('avatar');
     }
 }

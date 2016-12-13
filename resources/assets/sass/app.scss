@@ -8,12 +8,12 @@
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
-/* GROUP EDIT PAGE */
-#group-input-icon-edit{
+/* EDIT PAGE */
+#input-icon-edit{
   display: none;
 }
 
-#group-icon-edit:hover {
+#icon-edit:hover {
   cursor: pointer;
   opacity: 0.7;
 }

@@ -9,7 +9,7 @@
             <div class="profile-sidebar">
                 <!-- SIDEBAR USERPIC -->
                 <div class="profile-userpic">
-                    <img src="https://pbs.twimg.com/profile_images/631495506770817024/6OX4_2Gq.png" class="img-responsive" width="100" height="100">
+                    <img src="{{Storage::disk('public')->url(Auth::user()->avatar) }}" class="img-responsive" width="100" height="100">
                 </div>
                 <!-- END SIDEBAR USERPIC -->
                 <!-- SIDEBAR USER TITLE -->

@@ -21,12 +21,12 @@ const app = new Vue({
 
 $(function() {
     /* GROUP EDITION PAGE */
-    $("#group-icon-edit").click(function () {
-        $("#group-input-icon-edit").click();
+    $("#icon-edit").click(function () {
+        $("#input-icon-edit").click();
     });
     // Create the preview image
-    $("#group-input-icon-edit").change(function (){
-        var img = $('#group-icon-edit');
+    $("#input-icon-edit").change(function (){
+        var img = $('#icon-edit');
         var file = this.files[0];
         var reader = new FileReader();
         // Set preview image into the popover data-content

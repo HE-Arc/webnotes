@@ -20,9 +20,9 @@
                         <div class="col-md-6">
                             <!-- Icon file button -->
                             <div class="form-group" style="text-align: center;">
-                                <div class="input-group-btn">
-                                    <img id="group-icon-edit" src="{{ Storage::disk('public')->url('groups_icon/group_default.png') }}" alt="Group Icon" class="img-circle" title="Cliquer pour changer d'image" width="150" height="150">
-                                    <input id="group-input-icon-edit" name="icon" class="input-file" type="file" accept="image/png, image/jpeg, image/gif"/>
+                                <div class="input-btn">
+                                    <img id="icon-edit" src="{{ Storage::disk('public')->url('groups_icon/group_default.png') }}" alt="Group Icon" class="img-circle" title="Cliquer pour changer d'image" width="150" height="150">
+                                    <input id="input-icon-edit" name="icon" class="input-file" type="file" accept="image/png, image/jpeg, image/gif"/>
                                 </div>
                             </div>
                             <!-- Name text input-->
