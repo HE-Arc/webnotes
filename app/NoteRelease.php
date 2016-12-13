@@ -5,7 +5,7 @@ namespace WebNote;
 use Illuminate\Database\Eloquent\Model;
 
 
-class Note extends Model
+class NoteRelease extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -13,12 +13,12 @@ class Note extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'description', 'auteur'
+        'title', 'description', 'content', 'auteur', 'note_id'
     ];
 
     public function path()
     {
-        //return route('notes.show', ['id' => $this->id]);
+        
     }
 
     public function members()
@@ -31,8 +31,5 @@ class Note extends Model
         return null;
     }
 
-    public function releases()
-    {
-      return $this->hasMany('WebNote\NoteRelease')->orderBy('updated_at', 'desc');
-    }
+
 }
