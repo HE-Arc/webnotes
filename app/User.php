@@ -27,6 +27,26 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function getAvatarAttribute($value)
+    {
+        $avatar = $value;
+        if($avatar == null) {
+            $avatar = "/users_avatar/user_default.png";
+        }
+
+        return $avatar;
+    }
+
+    public function setAvatarAttribute($value)
+    {
+        if($value != null) {
+            $this->attributes['avatar'] = $value;
+        }
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function groups()
     {
         return $this->belongsToMany('WebNote\Group');

@@ -17,22 +17,22 @@
                 </h1>
             </div>
             <div class="panel-body">
-                @if(count($user->groups) > 0)
-                    <ul class="media-list">
-                        @foreach($user->groups as $group)
-                                <li class="media">
-                                    <div class="media-left">
-                                        <img src="{{ Storage::disk('public')->url($group->icon) }}" alt="{{ $group->name }} Icon" class="img-circle" width="60" height="60">
-                                    </div>
-                                    <div class="media-body">
-                                        <h4 class="media-heading">
-                                            <a href="{{ url($group->path()) }}" role="button">{{ $group->name }}</a>
-                                        </h4>
-                                        {{ $group->description }}
-                                    </div>
-                                </li>
+                @if(count($groups) > 0)
+                    <div class="list-group">
+                        @foreach($groups as $group)
+                            <a href="{{ url($group->path()) }}" class="list-group-item">
+                                <div class="media-left">
+                                    <img src="{{ Storage::disk('public')->url($group->icon) }}" alt="{{ $group->name }} Icon" class="img-circle" width="60" height="60">
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">
+                                        {{ $group->name }}
+                                    </h4>
+                                    {{ str_limit($group->description) }}
+                                </div>
+                            </a>
                         @endforeach
-                    </ul>
+                    </div>
                 @else
                     Pas de groupes !
                 @endif

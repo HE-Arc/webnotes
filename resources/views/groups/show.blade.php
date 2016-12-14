@@ -35,24 +35,35 @@
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="tabM">
                             @if(count($group->members) > 0)
-                                <ul class="media-list">
+                                <div class="list-group">
                             @foreach($group->members as $member)
-                                <li class="media">
-                                    <div class="media-left">
-                                        <img src="{{ Storage::disk('public')->url($member->avatar) }}" alt="{{$member->name}} Icon" class="img-circle" width="50" height="50"/>
+                                    <div class="list-group-item">
+                                        <div class="media-left">
+                                            <img src="{{ Storage::disk('public')->url($member->avatar) }}" alt="{{$member->name}} Icon" class="img-circle" width="50" height="50"/>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">{{ $member->name }}</h4>
+                                        </div>
                                     </div>
-                                    <div class="media-body">
-                                        <h4 class="media-heading">{{ $member->name }}</h4>
-                                    </div>
-                                </li>
                             @endforeach
-                                </ul>
+                                </div>
                             @else
                                 Pas de membres !
                             @endif
                         </div>
                         <div class="tab-pane fade in" id="tabN">
-                            <h3>This is tab 2</h3>
+                            @if(count($group->notes) > 0)
+                                <div class="list-group">
+                                    @foreach($group->notes as $note)
+                                        <a href="{{ url("/note/".$note->id) }}" class="list-group-item">
+                                        <h4 class="list-group-item-heading">{{ $note->title }}</h4>
+                                        <p class="list-group-item-text">{{ str_limit($note->description) }}</p>
+                                        </a>
+                                    @endforeach
+                                </div>
+                            @else
+                                Pas de notes !
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -62,9 +73,11 @@
                     <div class="col-md-6">
                         <a class="btn btn-primary" href="{{ url('/group') }}" role="button"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Retour à la liste</a>
                     </div>
-                    <div class="col-md-6 text-right">
-                        <a class="btn btn-success" href="{{ url($group->path().'/edit') }}" role="button"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editer</a>
-                    </div>
+                    {{--@if(true)--}}
+                        <div class="col-md-6 text-right">
+                            <a class="btn btn-success" href="{{ url($group->path().'/edit') }}" role="button"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editer</a>
+                        </div>
+                    {{--@endif--}}
                 </div>
             </div>
         </div>

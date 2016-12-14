@@ -21,7 +21,7 @@ class Note extends Model
         //return route('notes.show', ['id' => $this->id]);
     }
 
-    public function members()
+    public function users()
     {
         return $this->belongsToMany('WebNote\User')->orderBy('name');
     }
@@ -33,6 +33,6 @@ class Note extends Model
 
     public function releases()
     {
-      return $this->hasMany('WebNote\NoteRelease')->orderBy('updated_at', 'desc');
+        return $this->hasMany('WebNote\NoteRelease')->orderBy('updated_at', 'desc');
     }
 }
