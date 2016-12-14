@@ -53,7 +53,7 @@ class NotesController extends Controller
         $note = new Note;
         $note->title = $request->title;
         $note->description = $request->description;
-        $note->auteur = Auth::user()->name;        
+        $note->auteur = Auth::user()->name;
         $note->save();
         $note->users()->attach($user_id);
 
@@ -84,7 +84,8 @@ class NotesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $note = WebNote\Note::find($id);
+        return view('notes.editNote', compact('note'));
     }
 
     /**
@@ -96,7 +97,14 @@ class NotesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $note = WebNote\Note::find($id);
+        $values = $request->all();
+        $values['auteur'] = Auth::user()->name;
+        $values['title'] = $note->title;
+        $values['description'] = $note->description;
+        $note->releases()->create($values);
+
+        return redirect('notes');
     }
 
     /**
