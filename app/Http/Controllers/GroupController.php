@@ -98,7 +98,7 @@ class GroupController extends Controller
         $group = WebNote\Group::find($id);
         $group->update($request->all());
         $icon = null;
-        if($request->file('icon') === "") {
+        if($request->file('icon') != "") {
             $icon = $request->file('icon')->store('groups_icon', 'public');
         }
         $group->icon = $icon;

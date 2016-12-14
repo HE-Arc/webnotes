@@ -21,21 +21,15 @@ Route::get('/welcome', 'PagesController@index');
 
 Route::group(array('prefix' => 'account/'), function(){
     Route::get('', 'AccountController@viewAccount');
-    Route::get('/accountSettings', 'AccountController@accountSettings');
-    Route::get('/overview', 'AccountController@overview');
-    Route::get('/delete', 'AccountController@deleteAccount');
-    Route::get('/help', 'AccountController@getHelp');
+    Route::get('accountSettings', 'AccountController@accountSettings');
+    Route::get('overview', 'AccountController@overview');
+    Route::get('delete', 'AccountController@deleteAccount');
+    Route::get('help', 'AccountController@getHelp');
+    Route::patch('{user}', 'AccountController@update');
 });
 
-// Group of routes for NOTES
-Route::group(array('prefix' => 'notes/'), function()
-{
-    Route::get('', 'NotesController@index');
-    Route::get('create', 'NotesController@create');
-    Route::post('', 'NotesController@store');
-    Route::get('{group}', 'NotesController@show');
-});
-
+Route::resource('/notes', 'NotesController');
+Route::get('/releases', 'NoteReleasesController@store');
 Route::resource('/group', 'GroupController');
 
 Route::get('/searchusers', 'GroupController@users');

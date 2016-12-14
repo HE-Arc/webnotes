@@ -13,16 +13,17 @@ Liste Notes
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <form>
+                <form action="{{ url("/notes") }}" method="post">
+                  {{csrf_field()}}
                     <div class="panel-heading">
                         <div class="form-group">
                             <label for="NoteTitle">Titre</label>
-                            <input type="text" class="form-control" placeholder="Titre" id="NoteTitle" >
+                            <input type="text" class="form-control" placeholder="Title" id="NoteTitle" name="title">
                         </div>
 
                         <div class="form-group">
                             <label for="NoteTitle">Description</label>
-                            <textarea class="form-control" rows="3" placeholder="Description" id="NoteDescription" ></textarea>
+                            <textarea class="form-control" rows="3" placeholder="Description" id="NoteDescription" name="description"></textarea>
                         </div>
                     </div>
 
@@ -30,7 +31,7 @@ Liste Notes
                         <div class="form-group">
 
                             <label for="NoteContent">Contenu</label>
-                            <textarea id="NoteContent"></textarea>
+                            <textarea id="NoteContent" name="content"></textarea>
                         </div>
                     </div>
 

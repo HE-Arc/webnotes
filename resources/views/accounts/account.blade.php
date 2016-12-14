@@ -9,7 +9,7 @@
             <div class="profile-sidebar">
                 <!-- SIDEBAR USERPIC -->
                 <div class="profile-userpic">
-                    <img src="https://pbs.twimg.com/profile_images/631495506770817024/6OX4_2Gq.png" class="img-responsive" width="100" height="100">
+                    <img src="{{Storage::disk('public')->url(Auth::user()->avatar) }}" class="img-responsive" width="100" height="100">
                 </div>
                 <!-- END SIDEBAR USERPIC -->
                 <!-- SIDEBAR USER TITLE -->
@@ -24,7 +24,7 @@
                 <!-- END SIDEBAR USER TITLE -->
                 <!-- SIDEBAR BUTTONS -->
                 <div class="profile-userbuttons">
-                    <button type="button" class="btn btn-success btn-sm" onclick="location.href = '/notetest'">Créer une note</button>
+                    <button type="button" class="btn btn-success btn-sm" onclick="location.href = 'notes/'">Mes notes</button>
                     <button type="button" class="btn btn-danger btn-sm" onclick="deleteAccount(); return false;">Supprimer compte</button>
                 </div>
                 <!-- END SIDEBAR BUTTONS -->
@@ -34,22 +34,22 @@
                         <li class="active">
                             <a href="#" onclick="getOverview(); return false;">
                                 <i class="glyphicon glyphicon-home"></i>
-                                Overview </a>
+                                Aperçu </a>
                         </li>
                         <li>
                             <a href="#" onclick="getAccountSettings(); return false;">
                                 <i class="glyphicon glyphicon-user"></i>
-                                Account Settings </a>
+                                Paramètre de compte </a>
                         </li>
                         <li>
                             <a href="#" >
                                 <i class="glyphicon glyphicon-ok"></i>
-                                Tasks </a>
+                                Changer le mot de passe </a>
                         </li>
                         <li>
                             <a href="#" onclick="getHelp(); return false;">
                                 <i class="glyphicon glyphicon-flag"></i>
-                                Help </a>
+                                Aide </a>
                         </li>
                     </ul>
                 </div>
