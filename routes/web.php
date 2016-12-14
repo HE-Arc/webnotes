@@ -25,8 +25,11 @@ Route::group(array('prefix' => 'account/'), function(){
     Route::get('overview', 'AccountController@overview');
     Route::get('delete', 'AccountController@deleteAccount');
     Route::get('help', 'AccountController@getHelp');
+    Route::patch('{user}', 'AccountController@update');
 });
 
 Route::resource('/notes', 'NotesController');
 Route::post('/releases', 'NoteReleasesController@store');
 Route::resource('/group', 'GroupController');
+
+Route::get('/searchusers', 'GroupController@users');

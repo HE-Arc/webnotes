@@ -5,6 +5,7 @@ namespace WebNote\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\DomCrawler\AbstractUriElement;
 use WebNote\Http\Requests;
@@ -45,16 +46,17 @@ class GroupController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $group = new Group($request->all());
-        if($request->file('icon') != null) {
+        $icon = null;
+        if($request->file('icon') === "") {
             $icon = $request->file('icon')->store('groups_icon', 'public');
-            $group->icon = $icon;
         }
+        $group->icon = $icon;
         $group->save();
 
         return redirect('/group');
@@ -74,7 +76,7 @@ class GroupController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -87,30 +89,43 @@ class GroupController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $group = WebNote\Group::find($id);
         $group->update($request->all());
-        $icon = $request->file('icon')->store('groups_icon', 'public');
+        $icon = null;
+        if($request->file('icon') != "") {
+            $icon = $request->file('icon')->store('groups_icon', 'public');
+        }
         $group->icon = $icon;
         $group->save();
 
 
-        return redirect($group->path());
+        return $group;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function users(Request $request)
+    {
+        $users = WebNote\User::where('name', 'like', '%'.$request->term.'%')->get();
+        return Response::json($users);
     }
 }
