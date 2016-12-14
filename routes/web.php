@@ -29,7 +29,7 @@ Route::group(array('prefix' => 'account/'), function(){
 });
 
 Route::resource('/notes', 'NotesController');
-Route::get('/releases', 'NoteReleasesController@store');
+Route::post('/releases', 'NoteReleasesController@store');
 Route::resource('/group', 'GroupController');
 
 Route::get('/searchusers', 'GroupController@users');
