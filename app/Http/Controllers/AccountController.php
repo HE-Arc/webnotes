@@ -32,6 +32,10 @@ class AccountController extends Controller
         return view('accounts/accountOverview');
     }
 
+    public function getResetPass(){
+        return view('accounts/resetPass');
+    }
+
     public function deleteAccount(){
         return view('accounts/deleteAccount');
     }
@@ -49,5 +53,20 @@ class AccountController extends Controller
         $user->save();
 
         return redirect('account/');
+    }
+
+    public function updatePass(Request $request, $id){
+        $user = WebNote\User::find($id);
+        if (strcmp($user->password, $request->pass)){
+            $user->password = bcrypt($request->password);
+            $user->save();
+            //TODO ajouter texte a la vole pour la page de resultat
+            return view('accounts/resultatChangePass');
+        }
+        else{
+            return redirect('account/');
+        }
+
+
     }
 }

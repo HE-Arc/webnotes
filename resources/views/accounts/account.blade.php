@@ -42,7 +42,7 @@
                                 Paramètre de compte </a>
                         </li>
                         <li>
-                            <a href="#" >
+                            <a href="#" onclick="getResetPass(); return false;">
                                 <i class="glyphicon glyphicon-ok"></i>
                                 Changer le mot de passe </a>
                         </li>

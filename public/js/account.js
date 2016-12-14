@@ -42,3 +42,14 @@ function getHelp(){
     });
 }
 
+function getResetPass(){
+    $.ajax({
+        type: "GET",
+        url: '/account/resetPass',
+        success: function (data) {
+            $('#div1').html(data);
+
+        }
+    });
+}
+
