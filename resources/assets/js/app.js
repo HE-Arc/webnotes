@@ -20,7 +20,7 @@ const app = new Vue({
 });
 
 $(function() {
-    /* GROUP EDITION PAGE */
+    /* ICON UPLOADER */
     $("#icon-edit").click(function () {
         $("#input-icon-edit").click();
     });
@@ -34,6 +34,35 @@ $(function() {
             img.attr('src', e.target.result);
         };
         reader.readAsDataURL(file);
+    });
+
+    /* CREATE & EDITION PAGE - Members management*/
+    $("#searchMember").keyup(function () {
+        var jqxhr = $.getJSON( "/searchusers", {'term' : $("#searchMember").val()}, function(data) {
+            $("#foundedMembers").empty();
+            $.each(data, function (i, item) {
+                $("#foundedMembers").append(new Option(item.name, item.id));
+            });
+        });
+    });
+    $("#addMember").click(function(){
+        var option = $("#foundedMembers option:selected");
+        var exist = false;
+        $('#members option').each(function(){
+            if(this.value == option.val()) {
+                exist = true;
+            }
+        });
+        if(!exist) {
+            $("#members").append(option);
+        }
+    });
+    $("#removeMember").click(function(){
+        $("#members option:selected").remove();
+    });
+
+    $('#form_group').on('submit', function(){
+        $('#members option').prop('selected', true);
     });
 
     /* GROUP PROFILE PAGE */

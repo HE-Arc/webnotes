@@ -10,7 +10,7 @@
 @section('content')
     <div class="container">
         <div class="panel panel-default">
-            <form class="form-horizontal" action="{{ url("/group") }}" method="post" enctype="multipart/form-data">
+            <form id="form_group" class="form-horizontal" action="{{ url("/group") }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="panel-heading">
                     <h1>{{ $title }}</h1>
@@ -18,9 +18,9 @@
                 <div class="panel-body">
                     <!-- Icon file button -->
                     <div class="form-group" style="text-align: center;">
-                        <div class="input-group-btn">
-                            <img id="group-icon-edit" src="{{ Storage::disk('public')->url('groups_icon/group_default.png') }}" alt="Group Icon" class="img-circle" title="Cliquer pour changer d'image" width="150" height="150">
-                            <input id="group-input-icon-edit" name="icon" class="input-file" type="file" accept="image/png, image/jpeg, image/gif"/>
+                        <div class="input-btn">
+                            <img id="icon-edit" src="{{ Storage::disk('public')->url('groups_icon/group_default.png') }}" alt="Group Icon" class="img-circle" title="Cliquer pour changer d'image" width="150" height="150">
+                            <input id="input-icon-edit" name="icon" class="input-file" type="file" accept="image/png, image/jpeg, image/gif"/>
                         </div>
                     </div>
                     <!-- Name text input-->
@@ -46,17 +46,19 @@
                                 <div class="col-md-4">
                                     <input id="searchMember" name="searchMember" type="search" placeholder="Nom de l'utilisateur" class="form-control input-md"/>
                                 </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-success" id="addMember">Ajouter</button>
+                                </div>
                             </div>
                             <select multiple class="form-control" name="foundedMembers" id="foundedMembers">
                             </select>
                         </div>
                         <div class="col-md-6">
                             <h2>Membres</h2>
-                            <div class="form-group">
-                                <button type="button" class="btn btn-success" id="addMember">Ajouter</button>
+                            <div class="form-group col-md-2">
                                 <button type="button" class="btn btn-danger" id="removeMember">Supprimer</button>
                             </div>
-                            <select multiple class="form-control" name="members" id="members">
+                            <select multiple class="form-control" name="members[]" id="members">
                                 <option value="{{ Auth::user()->id}}">{{ Auth::user()->name }}</option>
                             </select>
                         </div>
@@ -76,29 +78,7 @@
     </div>
     <script>
         $(function () {
-            $("#searchMember").keypress(function () {
-                var jqxhr = $.getJSON( "/searchusers", {'term' : $("#searchMember").val()}, function(data) {
-                    $("#foundedMembers").empty();
-                    $.each(data, function (i, item) {
-                        $("#foundedMembers").append(new Option(item.name, item.id));
-                    });
-                });
-            });
-            $("#addMember").click(function(){
-                var option = $("#foundedMembers option:selected");
-                var exist = false;
-                $('#members option').each(function(){
-                    if(this.value == option.val()) {
-                        exist = true;
-                    }
-                });
-                if(!exist) {
-                    $("#members").append(option);
-                }
-            });
-            $("#removeMember").click(function(){
-                $("#members option:selected").remove();
-            });
+
         });
     </script>
 @endsection

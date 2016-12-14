@@ -28,8 +28,8 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        return view('groups.index', compact('user'));
+        $groups = Auth::user()->groups()->orderBy('name')->get();
+        return view('groups.index', compact('groups'));
     }
 
     /**
@@ -59,7 +59,10 @@ class GroupController extends Controller
         $group->icon = $icon;
         $group->save();
 
+        $group->members()->attach($request->members);
+
         return redirect('/group');
+//        return $request->members;
     }
 
     /**

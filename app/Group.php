@@ -45,7 +45,7 @@ class Group extends Model
 
     public function notes()
     {
-        return null;
+        return $this->belongsToMany('WebNote\Note');
     }
 
 
