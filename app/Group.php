@@ -16,6 +16,23 @@ class Group extends Model
         'name', 'description', 'icon'
     ];
 
+    public function getIconAttribute($value)
+    {
+        $icon = $value;
+        if($icon == null) {
+           $icon = "/groups_icon/group_default.png";
+        }
+
+        return $icon;
+    }
+
+    public function setIconAttribute($value)
+    {
+        if($value != null) {
+            $this->attributes['icon'] = $value;
+        }
+    }
+
     public function path()
     {
         return route('group.show', ['id' => $this->id]);

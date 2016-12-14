@@ -8,10 +8,10 @@ use WebNote\Http\Requests;
 
 class ApiGroupController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth', ['except' => 'logout']);
-    }
+//    public function __construct()
+//    {
+//        $this->middleware('auth', ['except' => 'logout']);
+//    }
 
     /**
      * Display a listing of the resource.

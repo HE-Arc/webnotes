@@ -37,3 +37,5 @@ Route::group(array('prefix' => 'notes/'), function()
 });
 
 Route::resource('/group', 'GroupController');
+
+Route::get('/searchusers', 'GroupController@users');
