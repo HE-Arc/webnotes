@@ -2,10 +2,10 @@
  * Created by nicolas on 30.11.16.
  */
 
-function getOverview(){
+function getOverview(id){
     $.ajax({
         type: "GET",
-        url: '/account/overview',
+        url: '/account/overview/' + id,
         success: function(data){
             $('#div1').html(data);
         }

@@ -3,7 +3,7 @@
 <form action="{{ url("/account/passUpdate/".Auth::user()->id) }}" method="post" id="formReset" enctype="multipart/form-data">
     {{ csrf_field() }}
     {{ method_field('PATCH') }}
-    <h2>Nouveau mot de passe:</h2>
+    <h2>Taper le nouveau mot de passe:</h2>
     <div class="form-group">
         <label for="newPass1">Nouveau mot de passe: </label>
         <input type="password" id="newPass1" class="form-control" name="password">
@@ -13,9 +13,8 @@
         <label for="newPass2">Nouveau mot de passe: </label>
         <input type="password" id="newPass2" class="form-control" name="password1">
     </div>
-    <h2>Changement d'adresse mail</h2>
     <div class="form-group">
-        <label for="pass">Ancien mot de passe: </label>
+        <label for="pass">Taper votre ancien mot de passe: </label>
         <input type="password" id="pass" class="form-control" name="pass">
     </div>
     <button type="submit" class="btn btn-info btn-lg" id="valid">Valider</button>

@@ -25,14 +25,14 @@
                 <!-- SIDEBAR BUTTONS -->
                 <div class="profile-userbuttons">
                     <button type="button" class="btn btn-success btn-sm" onclick="location.href = 'notes/'">Mes notes</button>
-                    <button type="button" class="btn btn-danger btn-sm" onclick="deleteAccount(); return false;">Supprimer compte</button>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="location.href = 'group/'">Mes groupes</button>
                 </div>
                 <!-- END SIDEBAR BUTTONS -->
                 <!-- SIDEBAR MENU -->
                 <div class="profile-usermenu">
                     <ul class="nav">
                         <li class="active">
-                            <a href="#" onclick="getOverview(); return false;">
+                            <a href="#" onclick="getOverview({{Auth::user()->id}}); return false;">
                                 <i class="glyphicon glyphicon-home"></i>
                                 Aperçu </a>
                         </li>
@@ -58,7 +58,9 @@
         </div>
         <div class="col-md-8">
             <div class="profile-content" id="div1">
-                Some user related content goes here...
+                <script>
+                    getOverview({{Auth::user()->id}});
+                </script>
             </div>
         </div>
     </div>
