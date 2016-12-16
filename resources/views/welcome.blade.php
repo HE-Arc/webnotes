@@ -32,7 +32,7 @@
                                 <a class="btn btn-lg btn-warning" href="{{ url("/register") }}" role="button"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> S'inscrire</a>
                             @else
                                 <a class="btn btn-lg btn-success" href="{{ url("/account") }}" role="button">Mon compte</a>
-                                <a class="btn btn-lg btn-warning" href="#" role="button">Mes notes</a>
+                                <a class="btn btn-lg btn-warning" href="{{url("/notes")}}" role="button">Mes notes</a>
                             @endif
                         </p>
                         <p id="about">Durant les études, il n’est pas rare d’avoir besoin de partager ces notes avec ces camarades ou tout du moins une partie d’entre eux. Nous basant sur ce principe il peut être intéressant également pour un professeur, ou un étudiant de vouloir partager ces cours. Il serait donc intéressant de pouvoir partager l’écran de l’application en deux permettant ainsi d’afficher le cours à côté de nos notes.</p>

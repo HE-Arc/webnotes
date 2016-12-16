@@ -34,3 +34,4 @@ Route::post('/releases', 'NoteReleasesController@store');
 Route::resource('/group', 'GroupController');
 
 Route::get('/searchusers', 'GroupController@users');
+Route::get('/searchgroups', 'NotesController@groups');
