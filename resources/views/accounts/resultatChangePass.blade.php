@@ -12,7 +12,7 @@
                     <div class="panel-heading">Dashboard</div>
 
                     <div class="panel-body">
-                        Mot de passe modifier avec succès.
+                        {{$resultat}}
                     </div>
                 </div>
             </div>
