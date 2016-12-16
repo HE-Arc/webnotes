@@ -37,7 +37,7 @@ Liste Notes
 
                     <div class="panel-footer">
                         <button type="submit" class="btn btn-primary" id="BtnNoteSave">Enregistrer</button>
-                        <button type="submit" class="btn btn-default" id="BtnNoteSave">Annuler</button>
+                        <button href="notes" class="btn btn-default" id="BtnNoteSave">Annuler</button>
                     </div>
                 </form>
             </div>
