@@ -28,7 +28,7 @@ class Note extends Model
 
     public function groups()
     {
-        return null;
+        return $this->belongsToMany('WebNote\Group')->orderBy('name');
     }
 
     public function releases()
