@@ -13,7 +13,7 @@ class CreateNotesReleasesTable extends Migration
      */
     public function up()
     {
-        Schema::create('notes_releases', function (Blueprint $table) {
+        Schema::create('note_releases', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
             $table->string('description');

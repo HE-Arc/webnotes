@@ -48,7 +48,6 @@ class NotesController extends Controller
      */
     public function store(Request $request)
     {
-        //$note = new Note($request->all());
         $user_id = Auth::user()->id;
         $note = new Note;
         $note->title = $request->title;
@@ -60,7 +59,6 @@ class NotesController extends Controller
         $values = $request->all();
         $values['auteur'] = Auth::user()->name;
         $note->releases()->create($values);
-
 
         return redirect('/notes');
     }
@@ -97,13 +95,14 @@ class NotesController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $note = WebNote\Note::find($id);
         $values = $request->all();
         $values['auteur'] = Auth::user()->name;
         $values['title'] = $note->title;
         $values['description'] = $note->description;
         $note->releases()->create($values);
-
+        
         return redirect('notes');
     }
 
