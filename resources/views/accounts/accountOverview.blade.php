@@ -3,12 +3,12 @@
 <div class="panel panel-default group-profile">
     <div class="panel-body">
         <div class="well">
-            @if(count($user->notes()) > 90)
+            @if(count($user->notes) > 0)
                 <strong>Titre et description de la dernière note:</strong>
                 <div class="panel-heading">
                     <h3>
                         {{ $user->notes()->orderBy('updated_at', 'desc')->first()->releases()->first()->title }}<br/>
-                        <small>{{ $user->notes()->orderBy('updated_at', 'desc')->first()->releases()->first()->title }}</small><br/>
+                        <small>{{ $user->notes()->orderBy('updated_at', 'desc')->first()->releases()->first()->description }}</small><br/>
                     </h3>
                 </div>
                 <strong>Vous avez écrit {{count($user->notes)}} note(s)</strong>
