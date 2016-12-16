@@ -2,7 +2,6 @@
 <link href="/css/account.css" rel="stylesheet">
 <script src="/js/account.js"></script>
 @section('content')
-
 <div class="container">
     <div class="row profile">
         <div class="col-md-4">
@@ -24,15 +23,15 @@
                 <!-- END SIDEBAR USER TITLE -->
                 <!-- SIDEBAR BUTTONS -->
                 <div class="profile-userbuttons">
-                    <button type="button" class="btn btn-success btn-sm" onclick="location.href = 'notes/'">Mes notes</button>
-                    <button type="button" class="btn btn-danger btn-sm" onclick="location.href = 'group/'">Mes groupes</button>
+                    <a role="button" class="btn btn-success btn-sm" href="notes/">Mes notes</a>
+                    <a role="button" class="btn btn-danger btn-sm" href="group/">Mes groupes</a>
                 </div>
                 <!-- END SIDEBAR BUTTONS -->
                 <!-- SIDEBAR MENU -->
                 <div class="profile-usermenu">
                     <ul class="nav">
                         <li class="active">
-                            <a href="#" onclick="getOverview({{Auth::user()->id}}); return false;">
+                            <a href="account/">
                                 <i class="glyphicon glyphicon-home"></i>
                                 Aperçu </a>
                         </li>
@@ -58,9 +57,60 @@
         </div>
         <div class="col-md-8">
             <div class="profile-content" id="div1">
-                <script>
-                    getOverview({{Auth::user()->id}});
-                </script>
+                <h1>Apercu du compte de {{ Auth::user()->name }}</h1>
+                <h2>Dernière note utilisée</h2>
+                <div class="panel panel-default group-profile">
+                    <div class="panel-body">
+                        <div class="well">
+                            @if(count(Auth::user()->notes) > 0)
+                                <strong>Titre et description de la dernière note:</strong>
+                                <div class="panel-heading">
+                                    <h3>
+                                        {{ Auth::user()->lastNote()->title }}<br/>
+                                        <small>{{ Auth::user()->lastNote()->description }}</small><br/>
+                                    </h3>
+                                </div>
+                                <strong>Vous avez écrit {{count(Auth::user()->notes)}} note(s)</strong>
+                            @else
+                                Vous n'avez pas encore rédigé de note !
+                            @endif
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a class="btn btn-primary" href="{{ url('/notes') }}" role="button"> Voir la liste de mes notes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Dernière activité de groupe </h2>
+                <div class="panel panel-default group-profile">
+                    <div class="panel-body">
+                        <div class="well">
+                            @if(count(Auth::user()->groups) > 0)
+                                <strong>Nom et description du dernier groupe rejoint:</strong>
+                                <div class="panel-heading">
+                                    <h3>
+                                        {{ Auth::user()->lastGroup()->name }}<br/>
+                                        <small>{{ Auth::user()->lastGroup()->description }}</small>
+                                    </h3>
+                                </div>
+                                <strong>Vous êtes inscrit dans {{count(Auth::user()->groups)}} groupe(s)</strong>
+                            @else
+                                Vous n'avez pas encore rejoins de groupe !
+                            @endif
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a class="btn btn-primary" href="{{ url('/group') }}" role="button"> Voir la liste de mes groupes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

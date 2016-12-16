@@ -56,4 +56,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('WebNote\Note');
     }
+
+    public function lastNote(){
+        return Note::all()->last()->releases()->first();
+    }
+
+    public function lastGroup(){
+        return Group::all()->last();
+    }
 }
