@@ -1,5 +1,5 @@
 <h1>Apercu du compte de {{ $user->name }}</h1>
-<h2>Dernière note utilisé</h2>
+<h2>Dernière note utilisée</h2>
 <div class="panel panel-default group-profile">
     <div class="panel-body">
         <div class="well">
