@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
 use Symfony\Component\DomCrawler\AbstractUriElement;
 use WebNote\Http\Requests;
 
 use WebNote;
 
 use WebNote\Note;
+
 class NotesController extends Controller
 {
     public function __construct()
