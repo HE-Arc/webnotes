@@ -11,7 +11,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-16 col-md-offset-0">
             <div class="panel panel-default">
                 <form action="{{ url("/notes") }}" method="post" id="form_note">
                   {{csrf_field()}}
@@ -20,75 +20,71 @@
                             <label for="NoteTitle">Titre</label>
                             <input type="text" class="form-control" placeholder="Title" id="NoteTitle" name="title">
                         </div>
-
                         <div class="form-group">
                             <label for="NoteTitle">Description</label>
                             <textarea class="form-control" rows="3" placeholder="Description" id="NoteDescription" name="description"></textarea>
                         </div>
                     </div>
-
                     <div class="panel-body">
                         <div class="form-group">
-
                             <label for="NoteContent">Contenu</label>
                             <textarea id="NoteContent" name="content"></textarea>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h2>Recherche d'un membre</h2>
-                            <!-- Member search input-->
-                            <div class="form-group">
-                                <label class="col-md-2 control-label" for="searchMember">Rechercher</label>
-                                <div class="col-md-4">
-                                    <input id="searchMemberNote" name="searchMemberNote" type="search" placeholder="Nom de l'utilisateur" class="form-control input-md"/>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2>Recherche d'un membre</h2>
+                                <!-- Member search input-->
+                                <div class="form-group col-md-6">
+                                    <div class="col-md-10">
+                                        <input id="searchMemberNote" name="searchMemberNote" type="search" placeholder="Nom de l'utilisateur" class="form-control input-md"/>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-success" id="addMemberNote">Ajouter</button>
+                                    </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="btn btn-success" id="addMemberNote">Ajouter</button>
+                                <select multiple class="form-control" name="foundedMembers" id="foundedMembersNote">
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <h2>Membres</h2>
+                                <div class="form-group col-md-2">
+                                    <button type="button" class="btn btn-danger" id="removeMemberNote">Supprimer</button>
                                 </div>
+                                <select multiple class="form-control" name="members[]" id="members">
+                                    <option value="{{ Auth::user()->id}}">{{ Auth::user()->name }}</option>
+                                </select>
                             </div>
-                            <select multiple class="form-control" name="foundedMembers" id="foundedMembersNote">
-                            </select>
                         </div>
-                        <div class="col-md-6">
-                            <h2>Membres</h2>
-                            <div class="form-group col-md-2">
-                                <button type="button" class="btn btn-danger" id="removeMemberNote">Supprimer</button>
-                            </div>
-                            <select multiple class="form-control" name="members[]" id="members">
-                                <option value="{{ Auth::user()->id}}">{{ Auth::user()->name }}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h2>Recherche d'un groupe</h2>
-                            <!-- Group search input-->
-                            <div class="form-group">
-                                <label class="col-md-2 control-label" for="searchGroup">Rechercher</label>
-                                <div class="col-md-4">
-                                    <input id="searchGroupNote" name="searchGroupNote" type="search" placeholder="Nom du groupe" class="form-control input-md"/>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2>Recherche d'un groupe</h2>
+                                <!-- Group search input-->
+                                <div class="form-group col-md-6">
+                                    <div class="col-md-10">
+                                        <input id="searchGroupNote" name="searchGroupNote" type="search" placeholder="Nom du groupe" class="form-control input-md"/>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-success" id="addGroupNote">Ajouter</button>
+                                    </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="btn btn-success" id="addGroupNote">Ajouter</button>
+                                <select multiple class="form-control" name="foundedGroups" id="foundedGroupNote">
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <h2>Groupes</h2>
+                                <div class="form-group col-md-2">
+                                    <button type="button" class="btn btn-danger" id="removeGroupNote">Supprimer</button>
                                 </div>
+                                <select multiple class="form-control" name="groups[]" id="groups">
+
+                                </select>
                             </div>
-                            <select multiple class="form-control" name="foundedGroups" id="foundedGroupNote">
-                            </select>
                         </div>
-                        <div class="col-md-6">
-                            <h2>Groups</h2>
-                            <div class="form-group col-md-2">
-                                <button type="button" class="btn btn-danger" id="removeGroupNote">Supprimer</button>
-                            </div>
-                            <select multiple class="form-control" name="groups[]" id="groups">
-                                <option value="{{ Auth::user()->id}}"></option>
-                            </select>
+                      </br>
+                        <div class="panel-footer">
+                            <button type="submit" class="btn btn-primary" id="BtnNoteSave">Enregistrer</button>
+                            <button href="notes" class="btn btn-default" id="BtnNoteSave">Annuler</button>
                         </div>
-                    </div>
-                    <div class="panel-footer">
-                        <button type="submit" class="btn btn-primary" id="BtnNoteSave">Enregistrer</button>
-                        <button href="notes" class="btn btn-default" id="BtnNoteSave">Annuler</button>
                     </div>
                 </form>
             </div>

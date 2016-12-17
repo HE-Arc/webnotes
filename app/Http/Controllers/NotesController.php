@@ -5,13 +5,13 @@ namespace WebNote\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\Response;
 use WebNote\Http\Requests;
 
 use WebNote;
 
 use WebNote\Note;
+
 class NotesController extends Controller
 {
     public function __construct()
