@@ -19,6 +19,9 @@ const app = new Vue({
     el: 'body'
 });
 
+/**
+ * WEBNOTE JS
+ */
 $(function() {
     /* ICON UPLOADER */
     $("#icon-edit").click(function () {
@@ -48,27 +51,51 @@ $(function() {
     $("#addMember").click(function(){
         var option = $("#foundedMembers option:selected");
         var exist = false;
-        $('#members option').each(function(){
-            if(this.value == option.val()) {
+        $('#members-list .list-group-item').each(function(){
+            if(this.id == option.val()) {
                 exist = true;
             }
         });
         if(!exist) {
-            $("#members").append(option);
+            $("#members-list").append(
+                "<div id='" + option.val() + "' class='list-group-item'>"
+                + "<div class='media-body'>"
+                + "<h4 class='media-heading'>" + option.text() + "</h4>"
+                + "<div class='checkbox'>"
+                + "<label>"
+                + "<input type='checkbox'>Administrateur"
+                + "</label>"
+                + "</div>"
+                + "</div>"
+                + "<div class='media-right media-middle'>"
+                + "<button type='button' class='btn btn-default removeMember'><span class='glyphicon glyphicon-remove-circle' aria-hidden='true'></span></button>"
+                + "</div>"
+                + "</div>"
+            );
         }
     });
-    $("#removeMember").click(function(){
-        $("#members option:selected").remove();
+
+    $(".removeMember").click(function(){
+        this.closest(".list-group-item").remove();
     });
 
-    $('#form_group').on('submit', function(){
-        $('#members option').prop('selected', true);
+    $('#form_group').submit(function(){
+        // e.preventDefault();
+        var members = new Array();
+        var membersPermission = new Array;
+        var i = 0;
+        $('#members-list .list-group-item').each(function(){
+            members[i] = this.id;
+            membersPermission[i] = $(this).find('.adminGroup').prop("checked") ? 1 : 0;
+            i = i + 1;
+        });
+        $("#members").val(JSON.stringify(members));
+        $("#membersPermission").val(membersPermission);
     });
 
     /* GROUP PROFILE PAGE */
     $(".group-profile .btn-pref .btn").click(function () {
         $(".group-profile .btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
-        // $(".tab").addClass("active"); // instead of this do the below
         $(this).removeClass("btn-default").addClass("btn-primary");
     });
 });

@@ -56,4 +56,17 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('WebNote\Note');
     }
+
+    public function canModifyGroup($id)
+    {
+        return $this->belongsToMany('WebNote\Group')->withPivot('permission')->find($id)->pivot->permission;
+    }
+
+    public function lastNote(){
+        return Note::all()->last()->releases()->first();
+    }
+
+    public function lastGroup(){
+        return Group::all()->last();
+    }
 }

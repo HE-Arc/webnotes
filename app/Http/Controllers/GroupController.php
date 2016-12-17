@@ -6,10 +6,8 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Storage;
-use Symfony\Component\DomCrawler\AbstractUriElement;
-use WebNote\Http\Requests;
 
+use Psy\Util\Json;
 use WebNote;
 
 use WebNote\Group;
@@ -51,18 +49,31 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
+        // Validation
+        $this->validate($request, [
+            'name'              => 'required',
+            'members'           => 'required',
+            'membersPermission' => 'required'
+        ]);
+
+        // Create the group
         $group = new Group($request->all());
+
+        // If icon exist -> save the icon in server
         $icon = null;
-        if($request->file('icon') === "") {
+        if ($request->file('icon') != "") {
             $icon = $request->file('icon')->store('groups_icon', 'public');
         }
         $group->icon = $icon;
         $group->save();
 
-        $group->members()->attach($request->members);
+        // Attach all members
+        foreach (json_decode($request->members) as $key => $id)
+        {
+            $group->members()->attach($id, ['permission' => array_get(explode(',', $request->membersPermission), $key)]);
+        }
 
         return redirect('/group');
-//        return $request->members;
     }
 
     /**
@@ -98,17 +109,33 @@ class GroupController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Validation
+        $this->validate($request, [
+            'name'              => 'required',
+            'members'           => 'required',
+            'membersPermission' => 'required'
+        ]);
+
+        // Update the group
         $group = WebNote\Group::find($id);
         $group->update($request->all());
+
+        // If icon exist -> save the icon in server
         $icon = null;
-        if($request->file('icon') != "") {
+        if ($request->file('icon') != "") {
             $icon = $request->file('icon')->store('groups_icon', 'public');
         }
         $group->icon = $icon;
         $group->save();
 
+        // Detach all old members and attach all new members
+        $group->members()->detach();
+        foreach (json_decode($request->members) as $key => $id)
+        {
+            $group->members()->attach($id, ['permission' => array_get(explode(',', $request->membersPermission), $key)]);
+        }
 
-        return $group;
+        return redirect('/group/'.$group->id);
     }
 
     /**
