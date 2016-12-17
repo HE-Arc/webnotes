@@ -1,4 +1,3 @@
-<script src="js/app.js"></script>
 <h1>Paramètre du compte {{ Auth::user()->name }}</h1>
 <p>Cette section vous permet de modifier les champs que vous désirez: </p>
 <form action="{{ url("/account/".Auth::user()->id) }}" class="form-horizontal" method="post" enctype="multipart/form-data">

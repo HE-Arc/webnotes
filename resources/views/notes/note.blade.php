@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-Liste Notes
+    Création d'une note
 @endsection
 
 @section('header')

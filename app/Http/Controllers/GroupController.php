@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
-use Psy\Util\Json;
 use WebNote;
 
 use WebNote\Group;

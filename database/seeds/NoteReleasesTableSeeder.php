@@ -6,7 +6,7 @@ class NoteReleasesTableSeeder extends Seeder {
 
     public function run()
     {
-        DB::table('notes_releases')->insert(
+        DB::table('note_releases')->insert(
 
             array(
                 array(

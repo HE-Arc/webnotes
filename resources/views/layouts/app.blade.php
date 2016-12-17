@@ -62,12 +62,12 @@
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="{{ url('/welcome') }}">Accueil</a>
-                                    <a href="{{ url('/account') }}">Mon compte</a>
-                                    <a href="{{ url('/group') }}">Mes groupes</a>
-                                    <a href="{{ url('/notes') }}">Mes notes</a>
-                                    <a href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Déconnexion</a>
+                                <li><a href="{{ url('/account') }}">Mon compte</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="{{ url('/notes') }}">Mes notes</a></li>
+                                <li><a href="{{ url('/group') }}">Mes groupes</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Déconnexion</a>
                                     <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                     </form>

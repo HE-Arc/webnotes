@@ -5,8 +5,8 @@ namespace WebNote\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use Symfony\Component\DomCrawler\AbstractUriElement;
+
+use Illuminate\Support\Facades\Response;
 use WebNote\Http\Requests;
 
 use WebNote;

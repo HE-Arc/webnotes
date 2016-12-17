@@ -1,6 +1,14 @@
 @extends('layouts/app')
-<link href="/css/account.css" rel="stylesheet">
-<script src="/js/account.js"></script>
+
+@section('title')
+    Mon Compte
+@endsection
+
+@section('header')
+    <link href="/css/account.css" rel="stylesheet">
+    <script src="/js/account.js"></script>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row profile">
@@ -8,7 +16,7 @@
             <div class="profile-sidebar">
                 <!-- SIDEBAR USERPIC -->
                 <div class="profile-userpic">
-                    <img src="{{Storage::disk('public')->url(Auth::user()->avatar) }}" class="img-responsive" width="100" height="100">
+                    <img src="{{Storage::disk('public')->url(Auth::user()->avatar) }}" class="img-responsive">
                 </div>
                 <!-- END SIDEBAR USERPIC -->
                 <!-- SIDEBAR USER TITLE -->
@@ -23,8 +31,8 @@
                 <!-- END SIDEBAR USER TITLE -->
                 <!-- SIDEBAR BUTTONS -->
                 <div class="profile-userbuttons">
-                    <a role="button" class="btn btn-success btn-sm" href="notes/">Mes notes</a>
-                    <a role="button" class="btn btn-danger btn-sm" href="group/">Mes groupes</a>
+                    <a role="button" class="btn btn-success btn-sm" href="{{ url('/notes') }}">Mes notes</a>
+                    <a role="button" class="btn btn-danger btn-sm" href="{{ url('/group') }}">Mes groupes</a>
                 </div>
                 <!-- END SIDEBAR BUTTONS -->
                 <!-- SIDEBAR MENU -->
