@@ -47,4 +47,21 @@
         </div>
     </div>
 </form>
+<script>
+    /* ICON UPLOADER */
+    $("#icon-edit").click(function () {
+        $("#input-icon-edit").click();
+    });
+    // Create the preview image
+    $("#input-icon-edit").change(function (){
+        var img = $('#icon-edit');
+        var file = this.files[0];
+        var reader = new FileReader();
+        // Set preview image into the popover data-content
+        reader.onload = function (e) {
+            img.attr('src', e.target.result);
+        };
+        reader.readAsDataURL(file);
+    });
+</script>
 

@@ -39,7 +39,7 @@
                 <div class="profile-usermenu">
                     <ul class="nav">
                         <li class="active">
-                            <a href="account/">
+                            <a href="{{ url('/account') }}">
                                 <i class="glyphicon glyphicon-home"></i>
                                 Aperçu </a>
                         </li>

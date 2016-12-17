@@ -13,8 +13,6 @@
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
 
-    @yield('header')
-
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -23,6 +21,9 @@
     </script>
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+
+    @yield('header')
+
 </head>
 <body>
     <nav class="navbar navbar-default navbar-static-top">

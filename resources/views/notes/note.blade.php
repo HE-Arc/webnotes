@@ -6,6 +6,7 @@
 
 @section('header')
     <link rel="stylesheet" href="/css/simplemde.min.css">
+    <script type="text/javascript" src="/js/simplemde.min.js"></script>
 @endsection
 
 @section('content')
@@ -91,7 +92,6 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="/js/simplemde.min.js"></script>
 <script>
     var simplemde = new SimpleMDE({
         element: $("#NoteContent")[0],
@@ -105,62 +105,6 @@
         } else {
             $(".navbar").show();
         }
-    });
-    //pour la rechercher d'utilisateurs
-    $("#searchMemberNote").keyup(function () {
-        var jqxhr = $.getJSON( "/searchusers", {'term' : $("#searchMemberNote").val()}, function(data) {
-            $("#foundedMembersNote").empty();
-            $.each(data, function (i, item) {
-                $("#foundedMembersNote").append(new Option(item.name, item.id));
-            });
-        });
-    });
-    $("#addMemberNote").click(function(){
-        var option = $("#foundedMembersNote option:selected");
-        var exist = false;
-        $('#members option').each(function(){
-            if(this.value == option.val()) {
-                exist = true;
-            }
-        });
-        if(!exist) {
-            $("#members").append(option);
-        }
-    });
-    $("#removeMemberNote").click(function(){
-        $("#members option:selected").remove();
-    });
-
-    $('#form_note').on('submit', function(){
-        $('#members option').prop('selected', true);
-    });
-    //pour la recherche de groupes
-    $("#searchGroupNote").keyup(function () {
-        var jqxhr = $.getJSON( "/searchgroups", {'term' : $("#searchGroupNote").val()}, function(data) {
-            $("#foundedGroupNote").empty();
-            $.each(data, function (i, item) {
-                $("#foundedGroupNote").append(new Option(item.name, item.id));
-            });
-        });
-    });
-    $("#addGroupNote").click(function(){
-        var option = $("#foundedGroupNote option:selected");
-        var exist = false;
-        $('#groups option').each(function(){
-            if(this.value == option.val()) {
-                exist = true;
-            }
-        });
-        if(!exist) {
-            $("#groups").append(option);
-        }
-    });
-    $("#removeGroupNote").click(function(){
-        $("#groups option:selected").remove();
-    });
-
-    $('#form_note').on('submit', function(){
-        $('#groups option').prop('selected', true);
     });
 </script>
 @endsection

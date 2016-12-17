@@ -19,17 +19,14 @@
             <div class="panel-body">
                 <div class="well">
                   @if(count($note->releases) > 0)
-                      <ul class="media-list">
-                          @foreach($note->releases as $release)
-                                  <li class="media">
-                                      <div class="media-body">
-                                          {{ $release->updated_at}}
-                                        </br>
-                                          {{ $release->content }}
-                                      </div>
-                                  </li>
-                          @endforeach
-                      </ul>
+                    <div class="list-group">
+                        @foreach($note->releases as $release)
+                            <div class="list-group-item">
+                                <h4 class="list-group-item-heading">{{ $release->updated_at }}</h4>
+                                <p class="list-group-item-text">{{ str_limit($release->content, 500) }}</p>
+                            </div>
+                        @endforeach
+                    </div>
                   @else
                       Pas de notes !
                   @endif

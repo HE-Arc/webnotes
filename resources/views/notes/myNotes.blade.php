@@ -18,18 +18,14 @@
             </div>
             <div class="panel-body">
                 @if(count($user->notes) > 0)
-                    <ul class="media-list">
+                    <div class="list-group">
                         @foreach($user->notes as $note)
-                                <li class="media">
-                                    <div class="media-body">
-                                        <h4 class="media-heading">
-                                            <a href="{{ route('notes.show', $note) }}" role="button">{{ $note->title }}</a>
-                                        </h4>
-                                        {{ $note->description }}
-                                    </div>
-                                </li>
+                            <a href="{{ route('notes.show', $note) }}" class="list-group-item">
+                                <h4 class="list-group-item-heading">{{ $note->title }}</h4>
+                                <p class="list-group-item-text">{{ str_limit($note->description) }}</p>
+                            </a>
                         @endforeach
-                    </ul>
+                    </div>
                 @else
                     Pas de notes !
                 @endif

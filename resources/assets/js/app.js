@@ -39,7 +39,7 @@ $(function() {
         reader.readAsDataURL(file);
     });
 
-    /* CREATE & EDITION PAGE - Members management*/
+    /* GROUP :: CREATE & EDIT PAGE - Members management*/
     $("#searchMember").keyup(function () {
         var jqxhr = $.getJSON( "/searchusers", {'term' : $("#searchMember").val()}, function(data) {
             $("#foundedMembers").empty();
@@ -93,9 +93,69 @@ $(function() {
         $("#membersPermission").val(membersPermission);
     });
 
-    /* GROUP PROFILE PAGE */
+    /* GROUP :: PROFILE PAGE */
     $(".group-profile .btn-pref .btn").click(function () {
         $(".group-profile .btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
         $(this).removeClass("btn-default").addClass("btn-primary");
+    });
+
+    /* NOTE :: CREATE & EDIT PAGE */
+    // Pour la rechercher d'utilisateurs
+    $("#searchMemberNote").keyup(function () {
+        var jqxhr = $.getJSON( "/searchusers", {'term' : $("#searchMemberNote").val()}, function(data) {
+            $("#foundedMembersNote").empty();
+            $.each(data, function (i, item) {
+                $("#foundedMembersNote").append(new Option(item.name, item.id));
+            });
+        });
+    });
+
+    $("#addMemberNote").click(function(){
+        var option = $("#foundedMembersNote option:selected");
+        var exist = false;
+        $('#members option').each(function(){
+            if(this.value == option.val()) {
+                exist = true;
+            }
+        });
+        if(!exist) {
+            $("#members").append(option);
+        }
+    });
+
+    $("#removeMemberNote").click(function(){
+        $("#members option:selected").remove();
+    });
+
+    // Pour la recherche de groupes
+    $("#searchGroupNote").keyup(function () {
+        var jqxhr = $.getJSON( "/searchgroups", {'term' : $("#searchGroupNote").val()}, function(data) {
+            $("#foundedGroupNote").empty();
+            $.each(data, function (i, item) {
+                $("#foundedGroupNote").append(new Option(item.name, item.id));
+            });
+        });
+    });
+
+    $("#addGroupNote").click(function(){
+        var option = $("#foundedGroupNote option:selected");
+        var exist = false;
+        $('#groups option').each(function(){
+            if(this.value == option.val()) {
+                exist = true;
+            }
+        });
+        if(!exist) {
+            $("#groups").append(option);
+        }
+    });
+
+    $("#removeGroupNote").click(function(){
+        $("#groups option:selected").remove();
+    });
+
+    $('#form_note').on('submit', function(){
+        $('#members option').prop('selected', true);
+        $('#groups option').prop('selected', true);
     });
 });
