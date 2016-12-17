@@ -12,6 +12,7 @@ namespace WebNote\Http\Controllers;
 use Illuminate\Http\Request;
 use WebNote;
 use WebNote\User;
+use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
 {
@@ -28,12 +29,14 @@ class AccountController extends Controller
         return view('accounts/accountSetting');
     }
 
-    public function overview(){
-        return view('accounts/accountOverview');
+    public function overview(Request $request, $id){
+        $user = WebNote\User::find($id);
+
+        return view('accounts/accountOverview', compact('user'));
     }
 
-    public function deleteAccount(){
-        return view('accounts/deleteAccount');
+    public function getResetPass(){
+        return view('accounts/resetPass');
     }
 
     public function getHelp(){
@@ -49,5 +52,18 @@ class AccountController extends Controller
         $user->save();
 
         return redirect('account/');
+    }
+
+    public function updatePass(Request $request, $id){
+        $user = WebNote\User::find($id);
+        if(Hash::check($request->pass, $user->password))
+        {
+            $request->user()->fill(['password' => Hash::make($request->password)])->save();
+            $resultat = "Mot de passe changer avec succès !";
+        }
+        else{
+            $resultat = "Ancien mot de passe incorrect ! Le mot de passe n'est pas changé !";
+        }
+        return view('accounts/resultatChangePass', compact('resultat'));
     }
 }

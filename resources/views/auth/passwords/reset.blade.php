@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Réinitialiser le mote de passe
+    Réinitialiser le mot de passe
 @endsection
 
 @section('content')

@@ -13,7 +13,7 @@ Liste Notes
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <form action="{{ url("/notes") }}" method="post">
+                <form action="{{ url("/notes") }}" method="post" id="form_note">
                   {{csrf_field()}}
                     <div class="panel-heading">
                         <div class="form-group">
@@ -34,10 +34,61 @@ Liste Notes
                             <textarea id="NoteContent" name="content"></textarea>
                         </div>
                     </div>
-
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h2>Recherche d'un membre</h2>
+                            <!-- Member search input-->
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="searchMember">Rechercher</label>
+                                <div class="col-md-4">
+                                    <input id="searchMemberNote" name="searchMemberNote" type="search" placeholder="Nom de l'utilisateur" class="form-control input-md"/>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-success" id="addMemberNote">Ajouter</button>
+                                </div>
+                            </div>
+                            <select multiple class="form-control" name="foundedMembers" id="foundedMembersNote">
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <h2>Membres</h2>
+                            <div class="form-group col-md-2">
+                                <button type="button" class="btn btn-danger" id="removeMemberNote">Supprimer</button>
+                            </div>
+                            <select multiple class="form-control" name="members[]" id="members">
+                                <option value="{{ Auth::user()->id}}">{{ Auth::user()->name }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h2>Recherche d'un groupe</h2>
+                            <!-- Group search input-->
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="searchGroup">Rechercher</label>
+                                <div class="col-md-4">
+                                    <input id="searchGroupNote" name="searchGroupNote" type="search" placeholder="Nom du groupe" class="form-control input-md"/>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-success" id="addGroupNote">Ajouter</button>
+                                </div>
+                            </div>
+                            <select multiple class="form-control" name="foundedGroups" id="foundedGroupNote">
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <h2>Groups</h2>
+                            <div class="form-group col-md-2">
+                                <button type="button" class="btn btn-danger" id="removeGroupNote">Supprimer</button>
+                            </div>
+                            <select multiple class="form-control" name="groups[]" id="groups">
+                                <option value="{{ Auth::user()->id}}"></option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="panel-footer">
                         <button type="submit" class="btn btn-primary" id="BtnNoteSave">Enregistrer</button>
-                        <button type="submit" class="btn btn-default" id="BtnNoteSave">Annuler</button>
+                        <button href="notes" class="btn btn-default" id="BtnNoteSave">Annuler</button>
                     </div>
                 </form>
             </div>
@@ -58,6 +109,62 @@ Liste Notes
         } else {
             $(".navbar").show();
         }
+    });
+    //pour la rechercher d'utilisateurs
+    $("#searchMemberNote").keyup(function () {
+        var jqxhr = $.getJSON( "/searchusers", {'term' : $("#searchMemberNote").val()}, function(data) {
+            $("#foundedMembersNote").empty();
+            $.each(data, function (i, item) {
+                $("#foundedMembersNote").append(new Option(item.name, item.id));
+            });
+        });
+    });
+    $("#addMemberNote").click(function(){
+        var option = $("#foundedMembersNote option:selected");
+        var exist = false;
+        $('#members option').each(function(){
+            if(this.value == option.val()) {
+                exist = true;
+            }
+        });
+        if(!exist) {
+            $("#members").append(option);
+        }
+    });
+    $("#removeMemberNote").click(function(){
+        $("#members option:selected").remove();
+    });
+
+    $('#form_note').on('submit', function(){
+        $('#members option').prop('selected', true);
+    });
+    //pour la recherche de groupes
+    $("#searchGroupNote").keyup(function () {
+        var jqxhr = $.getJSON( "/searchgroups", {'term' : $("#searchGroupNote").val()}, function(data) {
+            $("#foundedGroupNote").empty();
+            $.each(data, function (i, item) {
+                $("#foundedGroupNote").append(new Option(item.name, item.id));
+            });
+        });
+    });
+    $("#addGroupNote").click(function(){
+        var option = $("#foundedGroupNote option:selected");
+        var exist = false;
+        $('#groups option').each(function(){
+            if(this.value == option.val()) {
+                exist = true;
+            }
+        });
+        if(!exist) {
+            $("#groups").append(option);
+        }
+    });
+    $("#removeGroupNote").click(function(){
+        $("#groups option:selected").remove();
+    });
+
+    $('#form_note').on('submit', function(){
+        $('#groups option').prop('selected', true);
     });
 </script>
 @endsection
