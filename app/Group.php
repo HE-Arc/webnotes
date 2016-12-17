@@ -33,19 +33,14 @@ class Group extends Model
         }
     }
 
-    public function path()
-    {
-        return route('group.show', ['id' => $this->id]);
-    }
-
     public function members()
     {
-        return $this->belongsToMany('WebNote\User');
+        return $this->belongsToMany('WebNote\User')->orderBy('name');
     }
 
     public function notes()
     {
-        return $this->belongsToMany('WebNote\Note');
+        return $this->belongsToMany('WebNote\Note')->withPivot('permission')->orderBy('title');
     }
 
 

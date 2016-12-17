@@ -56,4 +56,8 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('WebNote\Note');
     }
+
+    public function canModifyGroup($id) {
+        return $this->belongsToMany('WebNote\Group')->withPivot('permission')->find($id)->pivot->permission;
+    }
 }

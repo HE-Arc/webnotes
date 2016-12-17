@@ -20,7 +20,7 @@
                 @if(count($groups) > 0)
                     <div class="list-group">
                         @foreach($groups as $group)
-                            <a href="{{ url($group->path()) }}" class="list-group-item">
+                            <a href="{{ url("/group/".$group->id) }}" class="list-group-item">
                                 <div class="media-left">
                                     <img src="{{ Storage::disk('public')->url($group->icon) }}" alt="{{ $group->name }} Icon" class="img-circle" width="60" height="60">
                                 </div>
