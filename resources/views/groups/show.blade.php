@@ -37,10 +37,10 @@
                             @if(count($group->notes) > 0)
                                 <div class="list-group">
                                     @foreach($group->notes as $note)
-                                        <a href="{{ url("/notes/".$note->id) }}" class="list-group-item">
+                                        <div href="{{ url("/notes/".$note->id) }}" class="list-group-item">
                                             <h4 class="list-group-item-heading">{{ $note->title }}</h4>
                                             <p class="list-group-item-text">{{ str_limit($note->description) }}</p>
-                                        </a>
+                                        </div>
                                     @endforeach
                                 </div>
                             @else
