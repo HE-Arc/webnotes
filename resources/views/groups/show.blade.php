@@ -76,7 +76,7 @@
                     </div>
                     @if(Auth::user()->canModifyGroup($group->id) == 1)
                         <div class="col-md-6 text-right">
-                            <a class="btn btn-success" href="{{ url('/group/'.$group->id.'/edit') }}" role="button"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editer</a>
+                            <a class="btn btn-success" href="{{ url('/group/'.$group->id.'/edit') }}" role="button"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Modifier</a>
                         </div>
                     @endif
                 </div>

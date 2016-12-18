@@ -43,5 +43,7 @@ class Group extends Model
         return $this->belongsToMany('WebNote\Note')->withPivot('permission')->orderBy('title');
     }
 
-
+    public function canModifyNote($id) {
+        return $this->belongsToMany('WebNote\Note')->withPivot('permission')->find($id)->pivot->permission;
+    }
 }

@@ -4,9 +4,10 @@ namespace WebNote\Http\Middleware;
 
 use Closure;
 
+
 use Illuminate\Support\Facades\Auth;
 
-class CheckIfAdminGroup
+class CheckIfCanModifyNote
 {
     /**
      * Handle an incoming request.
@@ -17,11 +18,10 @@ class CheckIfAdminGroup
      */
     public function handle($request, Closure $next)
     {
-
-        if(Auth::user()->canModifyGroup($request->group) == 1){
+        if(Auth::user()->canModifyNote($request->note) == 1){
             return $next($request);
         } else {
-            return redirect('/group/'.$request->group);
+            return redirect('/notes/'.$request->note);
         }
     }
 }

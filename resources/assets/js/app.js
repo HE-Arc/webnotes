@@ -39,7 +39,7 @@ $(function() {
         reader.readAsDataURL(file);
     });
 
-    /* GROUP :: CREATE & EDIT PAGE - Members management*/
+    /* CREATE & EDIT PAGE - Members management*/
     $("#searchMember").keyup(function () {
         var jqxhr = $.getJSON( "/searchusers", {'term' : $("#searchMember").val()}, function(data) {
             $("#foundedMembers").empty();
@@ -63,7 +63,7 @@ $(function() {
                 + "<h4 class='media-heading'>" + option.text() + "</h4>"
                 + "<div class='checkbox'>"
                 + "<label>"
-                + "<input type='checkbox'>Administrateur"
+                + "<input class='adminGroup' type='checkbox'>Administrateur"
                 + "</label>"
                 + "</div>"
                 + "</div>"
@@ -99,63 +99,129 @@ $(function() {
         $(this).removeClass("btn-default").addClass("btn-primary");
     });
 
-    /* NOTE :: CREATE & EDIT PAGE */
-    // Pour la rechercher d'utilisateurs
-    $("#searchMemberNote").keyup(function () {
-        var jqxhr = $.getJSON( "/searchusers", {'term' : $("#searchMemberNote").val()}, function(data) {
-            $("#foundedMembersNote").empty();
+    /* NOTE :: CREATE & EDIT PAGE - Groups management*/
+    $("#searchGroup").keyup(function () {
+        var jqxhr = $.getJSON( "/searchgroups", {'term' : $("#searchGroup").val()}, function(data) {
+            $("#foundedGroups").empty();
             $.each(data, function (i, item) {
-                $("#foundedMembersNote").append(new Option(item.name, item.id));
+                $("#foundedGroups").append(new Option(item.name, item.id));
             });
         });
     });
-
-    $("#addMemberNote").click(function(){
-        var option = $("#foundedMembersNote option:selected");
+    $("#addGroup").click(function(){
+        var option = $("#foundedGroups option:selected");
         var exist = false;
-        $('#members option').each(function(){
-            if(this.value == option.val()) {
+        $('#groups-list .list-group-item').each(function(){
+            if(this.id == option.val()) {
                 exist = true;
             }
         });
         if(!exist) {
-            $("#members").append(option);
+            $("#groups-list").append(
+                "<div id='" + option.val() + "' class='list-group-item'>"
+                + "<div class='media-body'>"
+                + "<h4 class='media-heading'>" + option.text() + "</h4>"
+                + "<div class='checkbox'>"
+                + "<label>"
+                + "<input class='adminGroup' type='checkbox'>Administrateur"
+                + "</label>"
+                + "</div>"
+                + "</div>"
+                + "<div class='media-right media-middle'>"
+                + "<button type='button' class='btn btn-default removeGroup'><span class='glyphicon glyphicon-remove-circle' aria-hidden='true'></span></button>"
+                + "</div>"
+                + "</div>"
+            );
         }
     });
 
-    $("#removeMemberNote").click(function(){
-        $("#members option:selected").remove();
+    $(".removeGroup").click(function(){
+        this.closest(".list-group-item").remove();
     });
 
-    // Pour la recherche de groupes
-    $("#searchGroupNote").keyup(function () {
-        var jqxhr = $.getJSON( "/searchgroups", {'term' : $("#searchGroupNote").val()}, function(data) {
-            $("#foundedGroupNote").empty();
-            $.each(data, function (i, item) {
-                $("#foundedGroupNote").append(new Option(item.name, item.id));
-            });
+    $('#form_note').submit(function(){
+        // e.preventDefault();
+        var members = new Array();
+        var membersPermission = new Array();
+        var groups = new Array();
+        var groupsPermission = new Array();
+        var i = 0;
+        $('#members-list .list-group-item').each(function(){
+            members[i] = this.id;
+            membersPermission[i] = $(this).find('.adminGroup').prop("checked") ? 1 : 0;
+            i = i + 1;
         });
-    });
+        $("#members").val(JSON.stringify(members));
+        $("#membersPermission").val(membersPermission);
 
-    $("#addGroupNote").click(function(){
-        var option = $("#foundedGroupNote option:selected");
-        var exist = false;
-        $('#groups option').each(function(){
-            if(this.value == option.val()) {
-                exist = true;
-            }
+        i = 0;
+        $('#groups-list .list-group-item').each(function(){
+            groups[i] = this.id;
+            groupsPermission[i] = $(this).find('.adminGroup').prop("checked") ? 1 : 0;
+            i = i + 1;
         });
-        if(!exist) {
-            $("#groups").append(option);
-        }
-    });
 
-    $("#removeGroupNote").click(function(){
-        $("#groups option:selected").remove();
+        $("#groups").val(JSON.stringify(groups));
+        $("#groupsPermission").val(groupsPermission);
     });
-
-    $('#form_note').on('submit', function(){
-        $('#members option').prop('selected', true);
-        $('#groups option').prop('selected', true);
-    });
+//
+//     /* NOTE :: CREATE & EDIT PAGE */
+//     // Pour la rechercher d'utilisateurs
+//     $("#searchMemberNote").keyup(function () {
+//         var jqxhr = $.getJSON( "/searchusers", {'term' : $("#searchMemberNote").val()}, function(data) {
+//             $("#foundedMembersNote").empty();
+//             $.each(data, function (i, item) {
+//                 $("#foundedMembersNote").append(new Option(item.name, item.id));
+//             });
+//         });
+//     });
+//
+//     $("#addMemberNote").click(function(){
+//         var option = $("#foundedMembersNote option:selected");
+//         var exist = false;
+//         $('#members option').each(function(){
+//             if(this.value == option.val()) {
+//                 exist = true;
+//             }
+//         });
+//         if(!exist) {
+//             $("#members").append(option);
+//         }
+//     });
+//
+//     $("#removeMemberNote").click(function(){
+//         $("#members option:selected").remove();
+//     });
+//
+//     // Pour la recherche de groupes
+//     $("#searchGroupNote").keyup(function () {
+//         var jqxhr = $.getJSON( "/searchgroups", {'term' : $("#searchGroupNote").val()}, function(data) {
+//             $("#foundedGroupNote").empty();
+//             $.each(data, function (i, item) {
+//                 $("#foundedGroupNote").append(new Option(item.name, item.id));
+//             });
+//         });
+//     });
+//
+//     $("#addGroupNote").click(function(){
+//         var option = $("#foundedGroupNote option:selected");
+//         var exist = false;
+//         $('#groups option').each(function(){
+//             if(this.value == option.val()) {
+//                 exist = true;
+//             }
+//         });
+//         if(!exist) {
+//             $("#groups").append(option);
+//         }
+//     });
+//
+//     $("#removeGroupNote").click(function(){
+//         $("#groups option:selected").remove();
+//     });
+//
+//     $('#form_note').on('submit', function(){
+//         $('#members option').prop('selected', true);
+//         $('#groups option').prop('selected', true);
+//     });
 });
