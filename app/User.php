@@ -27,10 +27,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function getAvatarAttribute($value)
+    public function getAvatarAttribute($avatar)
     {
-        $avatar = $value;
         if($avatar == null) {
+            // FIXME: Where is this file? --Yoan
             $avatar = "/users_avatar/user_default.png";
         }
 

@@ -51,7 +51,7 @@ a:focus {
   text-align: center;
   /*color: #333;*/
   background-color: #f5f8fa;
-  background: linear-gradient(rgba(44, 62, 80, 0.5)0%, rgba(44, 62, 80, 0.5)50%, rgba(44, 62, 80, 1.0)100%), url(/img/desk-laptop-notebook-pen.jpg) no-repeat bottom center scroll;
+  background: linear-gradient(rgba(44, 62, 80, 0.5)0%, rgba(44, 62, 80, 0.5)50%, rgba(44, 62, 80, 1.0)100%), url(../img/desk-laptop-notebook-pen.jpg) no-repeat bottom center scroll;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;

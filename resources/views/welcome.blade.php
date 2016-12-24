@@ -5,16 +5,9 @@
 @endsection
 
 @section('header')
-    <link href="/css/welcome.css" rel="stylesheet">
+    <link href="{{ asset('css/welcome.css') }}" rel="stylesheet">
     <!-- Custom Fonts -->
-    <link href="/css/font-awesome.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet" type="text/css">
 @endsection
 
 @section('content')
@@ -43,8 +36,8 @@
                                 <a href="https://github.com/HE-Arc/webnotes" class="btn btn-default btn-lg" target="_blank"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
                             </li>
                         </ul>
-                        <hr/>
-                        <p>Copyright &copy; WebNote++ 2016</p>
+                        <hr>
+                        <p>Copyright © WebNote++ 2016</p>
                     </div>
                 </div>
             </div>

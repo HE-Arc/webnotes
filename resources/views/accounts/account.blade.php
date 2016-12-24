@@ -5,8 +5,8 @@
 @endsection
 
 @section('header')
-    <link href="/css/account.css" rel="stylesheet">
-    <script src="/js/account.js"></script>
+    <link href="{{ asset('css/account.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/account.js') }}"></script>
 @endsection
 
 @section('content')
