@@ -2,9 +2,11 @@
 
 namespace WebNote\Http\Controllers;
 
+use Illuminate\Auth\Access\Response;
 use Illuminate\Http\Request;
 
 use WebNote\Http\Requests;
+use WebNote;
 
 class ApiAccountController extends Controller
 {
@@ -47,7 +49,16 @@ class ApiAccountController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = WebNote\User::find($id);
+        $mail = $user->email;
+        $name = $user->name;
+        $avatar = $user->avatar;
+
+        return Response::json([
+            'name' => $name,
+            'mail' => $mail,
+            'avatar' => $avatar
+        ]);
     }
 
     /**
@@ -70,7 +81,12 @@ class ApiAccountController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = WebNote\User::find($id);
+        $inputs = array_filter($request->except(['_token']));
+        $user->update($inputs);
+        $icon = $request->file('avatar')->store('users_avatar', 'public');
+        $user->avatar = $icon;
+        $user->save();
     }
 
     /**
