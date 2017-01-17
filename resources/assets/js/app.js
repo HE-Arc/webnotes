@@ -12,13 +12,13 @@ require('./bootstrap');
  * the body of the page. From here, you may begin adding components to
  * the application, or feel free to tweak this setup for your needs.
  */
-
+/*
 Vue.component('example', require('./components/Example.vue'));
 
 const app = new Vue({
     el: 'body'
 });
-
+*/
 /**
  * WEBNOTE JS
  */
@@ -41,7 +41,8 @@ $(function() {
 
     /* CREATE & EDIT PAGE - Members management*/
     $("#searchMember").keyup(function () {
-        var jqxhr = $.getJSON( "/searchusers", {'term' : $("#searchMember").val()}, function(data) {
+        var url = $(this).closest('form').attr('action');
+        var jqxhr = $.getJSON( url, {'term' : $("#searchMember").val()}, function(data) {
             $("#foundedMembers").empty();
             $.each(data, function (i, item) {
                 $("#foundedMembers").append(new Option(item.name, item.id));
@@ -81,8 +82,8 @@ $(function() {
 
     $('#form_group').submit(function(){
         // e.preventDefault();
-        var members = new Array();
-        var membersPermission = new Array;
+        var members = [];
+        var membersPermission = [];
         var i = 0;
         $('#members-list .list-group-item').each(function(){
             members[i] = this.id;
@@ -101,7 +102,8 @@ $(function() {
 
     /* NOTE :: CREATE & EDIT PAGE - Groups management*/
     $("#searchGroup").keyup(function () {
-        var jqxhr = $.getJSON( "/searchgroups", {'term' : $("#searchGroup").val()}, function(data) {
+        var url = $(this).closest('form').attr('action');
+        var jqxhr = $.getJSON( url, {'term' : $("#searchGroup").val()}, function(data) {
             $("#foundedGroups").empty();
             $.each(data, function (i, item) {
                 $("#foundedGroups").append(new Option(item.name, item.id));
@@ -141,10 +143,10 @@ $(function() {
 
     $('#form_note').submit(function(){
         // e.preventDefault();
-        var members = new Array();
-        var membersPermission = new Array();
-        var groups = new Array();
-        var groupsPermission = new Array();
+        var members = [];
+        var membersPermission = [];
+        var groups = [];
+        var groupsPermission = [];
         var i = 0;
         $('#members-list .list-group-item').each(function(){
             members[i] = this.id;

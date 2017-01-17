@@ -5,7 +5,7 @@ Edition d'une note
 @endsection
 
 @section('header')
-    <link rel="stylesheet" href="/css/simplemde.min.css">
+    <link rel="stylesheet" href="{{ asset('css/simplemde.min.css') }}">
 @endsection
 
 @section('content')
@@ -26,6 +26,7 @@ Edition d'une note
                   {{csrf_field()}}
                   {{method_field('PATCH')}}
                     <div class="panel-heading">
+                        {{-- Ces labels s'appliquent à quels champs? --}}
                         <div class="form-group">
                             <label for="NoteTitle">Titre</label></br>
                             <label for="NoteTitle">{{ $note->title }}</label>
@@ -150,7 +151,7 @@ Edition d'une note
         </div>
     </div>
 </div>
-<script type="text/javascript" src="/js/simplemde.min.js"></script>
+<script type="text/javascript" src="{{ asset('js/simplemde.min.js') }}"></script>
 <script>
     var simplemde = new SimpleMDE({
         element: $("#NoteContent")[0],

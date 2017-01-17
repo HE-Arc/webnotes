@@ -32,6 +32,6 @@ class CreateNoteReleasesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('notes_releases');
+        Schema::drop('note_releases');
     }
 }
