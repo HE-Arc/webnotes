@@ -18,10 +18,8 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 
-// Group of routes for the API versioning
-Route::group(array('prefix' => 'api'), function()
-{
-    Route::resource('/group', 'ApiGroupController@index');
-});
+Route::resource('/group', 'ApiGroupController');
+
+Route::get('/group/{group}/users', 'ApiGroupController@users');
 
 Route::resource('apiAccount', 'ApiAccountController');

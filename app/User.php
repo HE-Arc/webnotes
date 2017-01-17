@@ -27,10 +27,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function getAvatarAttribute($value)
+    public function getAvatarAttribute($avatar)
     {
-        $avatar = $value;
         if($avatar == null) {
+            // FIXME: Where is this file? --Yoan
             $avatar = "/users_avatar/user_default.png";
         }
 
@@ -55,6 +55,18 @@ class User extends Authenticatable
     public function notes()
     {
         return $this->belongsToMany('WebNote\Note');
+    }
+
+    public function canModifyGroup($id)
+    {
+        return $this->belongsToMany('WebNote\Group')->withPivot('permission')->find($id)->pivot->permission;
+    }
+
+    public function canModifyNote($id) {
+        if($this->belongsToMany('WebNote\Note')->withPivot('permission')->find($id) != null) {
+            return $this->belongsToMany('WebNote\Note')->withPivot('permission')->find($id)->pivot->permission;
+        }
+        return 0;
     }
 
     public function lastNote(){

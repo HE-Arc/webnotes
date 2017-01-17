@@ -5,13 +5,13 @@ namespace WebNote\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use Symfony\Component\DomCrawler\AbstractUriElement;
+use Illuminate\Support\Facades\Response;
 use WebNote\Http\Requests;
 
 use WebNote;
 
 use WebNote\Note;
+
 class NotesController extends Controller
 {
     public function __construct()
@@ -48,13 +48,32 @@ class NotesController extends Controller
      */
     public function store(Request $request)
     {
+        // Validation
+        $this->validate($request, [
+            'title'             => 'required',
+            'members'           => 'required',
+            'membersPermission' => 'required',
+        ]);
+
         $note = new Note;
         $note->title = $request->title;
         $note->description = $request->description;
         $note->auteur = Auth::user()->name;
         $note->save();
-        $note->users()->attach($request->members);
-        $note->groups()->attach($request->groups);
+
+
+
+        // Attach all users
+        foreach (json_decode($request->members) as $key => $id)
+        {
+            $note->users()->attach($id, ['permission' => array_get(explode(',', $request->membersPermission), $key)]);
+        }
+
+        // Attach all groups
+        foreach (json_decode($request->groups) as $key => $id)
+        {
+            $note->groups()->attach($id, ['permission' => array_get(explode(',', $request->groupsPermission), $key)]);
+        }
 
         $values = $request->all();
         $values['auteur'] = Auth::user()->name;
@@ -95,8 +114,28 @@ class NotesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'members'           => 'required',
+            'membersPermission' => 'required',
+        ]);
 
         $note = WebNote\Note::find($id);
+
+        $note->users()->detach();
+        // Attach all users
+        foreach (json_decode($request->members) as $key => $id)
+        {
+            $note->users()->attach($id, ['permission' => array_get(explode(',', $request->membersPermission), $key)]);
+        }
+
+        $note->groups()->detach();
+        // Attach all groups
+        foreach (json_decode($request->groups) as $key => $id)
+        {
+            $note->groups()->attach($id, ['permission' => array_get(explode(',', $request->groupsPermission), $key)]);
+        }
+
+
         $values = $request->all();
         $values['auteur'] = Auth::user()->name;
         $values['title'] = $note->title;

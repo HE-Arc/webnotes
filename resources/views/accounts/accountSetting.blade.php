@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 44219bdf51158895f48d85f7afc3ac73f9147c53
 <h1>Paramètre du compte {{ Auth::user()->name }}</h1>
 <p>Cette section vous permet de modifier les champs que vous désirez: </p>
 <form action="{{ url("/account/".Auth::user()->id) }}" class="form-horizontal" method="post" enctype="multipart/form-data">
@@ -48,5 +51,25 @@
         </div>
     </div>
 </form>
+<<<<<<< HEAD
 <script src="js/app.js"></script>
+=======
+<script>
+    /* ICON UPLOADER */
+    $("#icon-edit").click(function () {
+        $("#input-icon-edit").click();
+    });
+    // Create the preview image
+    $("#input-icon-edit").change(function (){
+        var img = $('#icon-edit');
+        var file = this.files[0];
+        var reader = new FileReader();
+        // Set preview image into the popover data-content
+        reader.onload = function (e) {
+            img.attr('src', e.target.result);
+        };
+        reader.readAsDataURL(file);
+    });
+</script>
+>>>>>>> 44219bdf51158895f48d85f7afc3ac73f9147c53
 

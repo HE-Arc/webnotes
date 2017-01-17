@@ -1,17 +1,27 @@
 @extends('layouts.app')
 
 @section('title')
-Liste Notes
+    Création d'une note
 @endsection
 
 @section('header')
     <link rel="stylesheet" href="/css/simplemde.min.css">
+    <script type="text/javascript" src="/js/simplemde.min.js"></script>
 @endsection
 
 @section('content')
 <div class="container">
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-12 col-md-offset-0">
             <div class="panel panel-default">
                 <form action="{{ url("/notes") }}" method="post" id="form_note">
                   {{csrf_field()}}
@@ -20,82 +30,91 @@ Liste Notes
                             <label for="NoteTitle">Titre</label>
                             <input type="text" class="form-control" placeholder="Title" id="NoteTitle" name="title">
                         </div>
-
                         <div class="form-group">
                             <label for="NoteTitle">Description</label>
                             <textarea class="form-control" rows="3" placeholder="Description" id="NoteDescription" name="description"></textarea>
                         </div>
                     </div>
-
                     <div class="panel-body">
                         <div class="form-group">
-
                             <label for="NoteContent">Contenu</label>
                             <textarea id="NoteContent" name="content"></textarea>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h2>Recherche d'un membre</h2>
-                            <!-- Member search input-->
-                            <div class="form-group">
-                                <label class="col-md-2 control-label" for="searchMember">Rechercher</label>
-                                <div class="col-md-4">
-                                    <input id="searchMemberNote" name="searchMemberNote" type="search" placeholder="Nom de l'utilisateur" class="form-control input-md"/>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- Member search input-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="searchMember">Rechercher un membre</label>
+                                    <div class="col-md-5">
+                                        <input id="searchMember" name="searchMember" type="search" placeholder="Nom de l'utilisateur" class="form-control input-md"/>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="button" class="btn btn-success" id="addMember">Ajouter</button>
+                                    </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="btn btn-success" id="addMemberNote">Ajouter</button>
+                                <div class="form-group">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-5">
+                                        <select size="3" class="form-control" name="foundedMembers" id="foundedMembers">
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <select multiple class="form-control" name="foundedMembers" id="foundedMembersNote">
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <h2>Membres</h2>
-                            <div class="form-group col-md-2">
-                                <button type="button" class="btn btn-danger" id="removeMemberNote">Supprimer</button>
-                            </div>
-                            <select multiple class="form-control" name="members[]" id="members">
-                                <option value="{{ Auth::user()->id}}">{{ Auth::user()->name }}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h2>Recherche d'un groupe</h2>
-                            <!-- Group search input-->
-                            <div class="form-group">
-                                <label class="col-md-2 control-label" for="searchGroup">Rechercher</label>
-                                <div class="col-md-4">
-                                    <input id="searchGroupNote" name="searchGroupNote" type="search" placeholder="Nom du groupe" class="form-control input-md"/>
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="btn btn-success" id="addGroupNote">Ajouter</button>
+                                <div class="col-md-12">
+                                    <h2>Membres</h2>
+                                    <div id="members-list" class="list-group">
+                                        <div id="{{ Auth::user()->id}}" class="list-group-item">
+                                            <div class="media-body">
+                                                <h4 class="media-heading">{{ Auth::user()->name }}</h4>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input class="adminGroup" name="admin{{ Auth::user()->id }}" type="checkbox" checked disabled>
+                                                        Administrateur
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <select multiple class="form-control" name="foundedGroups" id="foundedGroupNote">
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <h2>Groups</h2>
-                            <div class="form-group col-md-2">
-                                <button type="button" class="btn btn-danger" id="removeGroupNote">Supprimer</button>
+                            <div class="col-md-6">
+                                <!-- Group search input-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="searchGroup">Rechercher un groupe</label>
+                                    <div class="col-md-5">
+                                        <input id="searchGroup" name="searchGroup" type="search" placeholder="Nom du groupe" class="form-control input-md"/>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="button" class="btn btn-success" id="addGroup">Ajouter</button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-5">
+                                        <select size="3" class="form-control" name="foundedGroups" id="foundedGroups">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <h2>Groupes</h2>
+                                    <div id="groups-list" class="list-group">
+                                    </div>
+                                </div>
                             </div>
-                            <select multiple class="form-control" name="groups[]" id="groups">
-                                <option value="{{ Auth::user()->id}}"></option>
-                            </select>
                         </div>
                     </div>
                     <div class="panel-footer">
                         <button type="submit" class="btn btn-primary" id="BtnNoteSave">Enregistrer</button>
-                        <button href="notes" class="btn btn-default" id="BtnNoteSave">Annuler</button>
+                        <a class="btn btn-default" href="{{ url('/notes') }}" role="button">Annuler</a>
                     </div>
+                    <input type="hidden" name="members" id="members" value=""/>
+                    <input type="hidden" name="membersPermission" id="membersPermission" value=""/>
+                    <input type="hidden" name="groups" id="groups" value=""/>
+                    <input type="hidden" name="groupsPermission" id="groupsPermission" value=""/>
                 </form>
             </div>
         </div>
     </div>
 </div>
-<script type="text/javascript" src="/js/simplemde.min.js"></script>
 <script>
     var simplemde = new SimpleMDE({
         element: $("#NoteContent")[0],
@@ -109,62 +128,6 @@ Liste Notes
         } else {
             $(".navbar").show();
         }
-    });
-    //pour la rechercher d'utilisateurs
-    $("#searchMemberNote").keyup(function () {
-        var jqxhr = $.getJSON( "/searchusers", {'term' : $("#searchMemberNote").val()}, function(data) {
-            $("#foundedMembersNote").empty();
-            $.each(data, function (i, item) {
-                $("#foundedMembersNote").append(new Option(item.name, item.id));
-            });
-        });
-    });
-    $("#addMemberNote").click(function(){
-        var option = $("#foundedMembersNote option:selected");
-        var exist = false;
-        $('#members option').each(function(){
-            if(this.value == option.val()) {
-                exist = true;
-            }
-        });
-        if(!exist) {
-            $("#members").append(option);
-        }
-    });
-    $("#removeMemberNote").click(function(){
-        $("#members option:selected").remove();
-    });
-
-    $('#form_note').on('submit', function(){
-        $('#members option').prop('selected', true);
-    });
-    //pour la recherche de groupes
-    $("#searchGroupNote").keyup(function () {
-        var jqxhr = $.getJSON( "/searchgroups", {'term' : $("#searchGroupNote").val()}, function(data) {
-            $("#foundedGroupNote").empty();
-            $.each(data, function (i, item) {
-                $("#foundedGroupNote").append(new Option(item.name, item.id));
-            });
-        });
-    });
-    $("#addGroupNote").click(function(){
-        var option = $("#foundedGroupNote option:selected");
-        var exist = false;
-        $('#groups option').each(function(){
-            if(this.value == option.val()) {
-                exist = true;
-            }
-        });
-        if(!exist) {
-            $("#groups").append(option);
-        }
-    });
-    $("#removeGroupNote").click(function(){
-        $("#groups option:selected").remove();
-    });
-
-    $('#form_note').on('submit', function(){
-        $('#groups option').prop('selected', true);
     });
 </script>
 @endsection

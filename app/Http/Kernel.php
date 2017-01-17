@@ -52,5 +52,7 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \WebNote\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'adminGroup' => \WebNote\Http\Middleware\CheckIfAdminGroup::class,
+        'modifyNote' => \WebNote\Http\Middleware\CheckIfCanModifyNote::class,
     ];
 }

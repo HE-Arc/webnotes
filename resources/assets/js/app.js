@@ -12,13 +12,16 @@ require('./bootstrap');
  * the body of the page. From here, you may begin adding components to
  * the application, or feel free to tweak this setup for your needs.
  */
-
+/*
 Vue.component('example', require('./components/Example.vue'));
 
 const app = new Vue({
     el: 'body'
 });
-
+*/
+/**
+ * WEBNOTE JS
+ */
 $(function() {
     /* ICON UPLOADER */
     $("#icon-edit").click(function () {
@@ -36,9 +39,10 @@ $(function() {
         reader.readAsDataURL(file);
     });
 
-    /* CREATE & EDITION PAGE - Members management*/
+    /* CREATE & EDIT PAGE - Members management*/
     $("#searchMember").keyup(function () {
-        var jqxhr = $.getJSON( "/searchusers", {'term' : $("#searchMember").val()}, function(data) {
+        var url = $(this).closest('form').attr('action');
+        var jqxhr = $.getJSON( url, {'term' : $("#searchMember").val()}, function(data) {
             $("#foundedMembers").empty();
             $.each(data, function (i, item) {
                 $("#foundedMembers").append(new Option(item.name, item.id));
@@ -48,27 +52,178 @@ $(function() {
     $("#addMember").click(function(){
         var option = $("#foundedMembers option:selected");
         var exist = false;
-        $('#members option').each(function(){
-            if(this.value == option.val()) {
+        $('#members-list .list-group-item').each(function(){
+            if(this.id == option.val()) {
                 exist = true;
             }
         });
         if(!exist) {
-            $("#members").append(option);
+            $("#members-list").append(
+                "<div id='" + option.val() + "' class='list-group-item'>"
+                + "<div class='media-body'>"
+                + "<h4 class='media-heading'>" + option.text() + "</h4>"
+                + "<div class='checkbox'>"
+                + "<label>"
+                + "<input class='adminGroup' type='checkbox'>Administrateur"
+                + "</label>"
+                + "</div>"
+                + "</div>"
+                + "<div class='media-right media-middle'>"
+                + "<button type='button' class='btn btn-default removeMember'><span class='glyphicon glyphicon-remove-circle' aria-hidden='true'></span></button>"
+                + "</div>"
+                + "</div>"
+            );
         }
     });
-    $("#removeMember").click(function(){
-        $("#members option:selected").remove();
+
+    $(".removeMember").click(function(){
+        this.closest(".list-group-item").remove();
     });
 
-    $('#form_group').on('submit', function(){
-        $('#members option').prop('selected', true);
+    $('#form_group').submit(function(){
+        // e.preventDefault();
+        var members = [];
+        var membersPermission = [];
+        var i = 0;
+        $('#members-list .list-group-item').each(function(){
+            members[i] = this.id;
+            membersPermission[i] = $(this).find('.adminGroup').prop("checked") ? 1 : 0;
+            i = i + 1;
+        });
+        $("#members").val(JSON.stringify(members));
+        $("#membersPermission").val(membersPermission);
     });
 
-    /* GROUP PROFILE PAGE */
+    /* GROUP :: PROFILE PAGE */
     $(".group-profile .btn-pref .btn").click(function () {
         $(".group-profile .btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
-        // $(".tab").addClass("active"); // instead of this do the below
         $(this).removeClass("btn-default").addClass("btn-primary");
     });
+
+    /* NOTE :: CREATE & EDIT PAGE - Groups management*/
+    $("#searchGroup").keyup(function () {
+        var url = $(this).closest('form').attr('action');
+        var jqxhr = $.getJSON( url, {'term' : $("#searchGroup").val()}, function(data) {
+            $("#foundedGroups").empty();
+            $.each(data, function (i, item) {
+                $("#foundedGroups").append(new Option(item.name, item.id));
+            });
+        });
+    });
+    $("#addGroup").click(function(){
+        var option = $("#foundedGroups option:selected");
+        var exist = false;
+        $('#groups-list .list-group-item').each(function(){
+            if(this.id == option.val()) {
+                exist = true;
+            }
+        });
+        if(!exist) {
+            $("#groups-list").append(
+                "<div id='" + option.val() + "' class='list-group-item'>"
+                + "<div class='media-body'>"
+                + "<h4 class='media-heading'>" + option.text() + "</h4>"
+                + "<div class='checkbox'>"
+                + "<label>"
+                + "<input class='adminGroup' type='checkbox'>Administrateur"
+                + "</label>"
+                + "</div>"
+                + "</div>"
+                + "<div class='media-right media-middle'>"
+                + "<button type='button' class='btn btn-default removeGroup'><span class='glyphicon glyphicon-remove-circle' aria-hidden='true'></span></button>"
+                + "</div>"
+                + "</div>"
+            );
+        }
+    });
+
+    $(".removeGroup").click(function(){
+        this.closest(".list-group-item").remove();
+    });
+
+    $('#form_note').submit(function(){
+        // e.preventDefault();
+        var members = [];
+        var membersPermission = [];
+        var groups = [];
+        var groupsPermission = [];
+        var i = 0;
+        $('#members-list .list-group-item').each(function(){
+            members[i] = this.id;
+            membersPermission[i] = $(this).find('.adminGroup').prop("checked") ? 1 : 0;
+            i = i + 1;
+        });
+        $("#members").val(JSON.stringify(members));
+        $("#membersPermission").val(membersPermission);
+
+        i = 0;
+        $('#groups-list .list-group-item').each(function(){
+            groups[i] = this.id;
+            groupsPermission[i] = $(this).find('.adminGroup').prop("checked") ? 1 : 0;
+            i = i + 1;
+        });
+
+        $("#groups").val(JSON.stringify(groups));
+        $("#groupsPermission").val(groupsPermission);
+    });
+//
+//     /* NOTE :: CREATE & EDIT PAGE */
+//     // Pour la rechercher d'utilisateurs
+//     $("#searchMemberNote").keyup(function () {
+//         var jqxhr = $.getJSON( "/searchusers", {'term' : $("#searchMemberNote").val()}, function(data) {
+//             $("#foundedMembersNote").empty();
+//             $.each(data, function (i, item) {
+//                 $("#foundedMembersNote").append(new Option(item.name, item.id));
+//             });
+//         });
+//     });
+//
+//     $("#addMemberNote").click(function(){
+//         var option = $("#foundedMembersNote option:selected");
+//         var exist = false;
+//         $('#members option').each(function(){
+//             if(this.value == option.val()) {
+//                 exist = true;
+//             }
+//         });
+//         if(!exist) {
+//             $("#members").append(option);
+//         }
+//     });
+//
+//     $("#removeMemberNote").click(function(){
+//         $("#members option:selected").remove();
+//     });
+//
+//     // Pour la recherche de groupes
+//     $("#searchGroupNote").keyup(function () {
+//         var jqxhr = $.getJSON( "/searchgroups", {'term' : $("#searchGroupNote").val()}, function(data) {
+//             $("#foundedGroupNote").empty();
+//             $.each(data, function (i, item) {
+//                 $("#foundedGroupNote").append(new Option(item.name, item.id));
+//             });
+//         });
+//     });
+//
+//     $("#addGroupNote").click(function(){
+//         var option = $("#foundedGroupNote option:selected");
+//         var exist = false;
+//         $('#groups option').each(function(){
+//             if(this.value == option.val()) {
+//                 exist = true;
+//             }
+//         });
+//         if(!exist) {
+//             $("#groups").append(option);
+//         }
+//     });
+//
+//     $("#removeGroupNote").click(function(){
+//         $("#groups option:selected").remove();
+//     });
+//
+//     $('#form_note').on('submit', function(){
+//         $('#members option').prop('selected', true);
+//         $('#groups option').prop('selected', true);
+//     });
 });

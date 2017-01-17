@@ -8,12 +8,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title') &middot; WebNote++</title>
+    <title>@yield('title') · WebNote++</title>
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
-
-    @yield('header')
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -22,7 +20,10 @@
         ]); ?>
     </script>
     <!-- Scripts -->
-    <script src="/js/app.js"></script>
+    <script src="{{ asset('/js/app.js') }}"></script>
+
+    @yield('header')
+
 </head>
 <body>
     <nav class="navbar navbar-default navbar-static-top">
@@ -62,12 +63,12 @@
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="{{ url('/welcome') }}">Accueil</a>
-                                    <a href="{{ url('/account') }}">Mon compte</a>
-                                    <a href="{{ url('/group') }}">Mes groupes</a>
-                                    <a href="{{ url('/notes') }}">Mes notes</a>
-                                    <a href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Déconnexion</a>
+                                <li><a href="{{ url('/account') }}">Mon compte</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="{{ url('/notes') }}">Mes notes</a></li>
+                                <li><a href="{{ url('/group') }}">Mes groupes</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Déconnexion</a>
                                     <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                     </form>

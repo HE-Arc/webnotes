@@ -11,13 +11,9 @@
 |
 */
 
-Route::get('/', 'PagesController@index');
+Route::get('/', 'HomeController@index');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index');
-
-Route::get('/welcome', 'PagesController@index');
 
 Route::group(array('prefix' => 'account/'), function(){
     Route::get('', 'AccountController@viewAccount');
@@ -31,7 +27,9 @@ Route::group(array('prefix' => 'account/'), function(){
 
 Route::resource('/notes', 'NotesController');
 Route::post('/releases', 'NoteReleasesController@store');
+Route::get('/notes/{note}/edit', 'NotesController@edit')->middleware('modifyNote');
 Route::resource('/group', 'GroupController');
+Route::get('/group/{group}/edit', 'GroupController@edit')->middleware('adminGroup');
 
 Route::get('/searchusers', 'GroupController@users');
 Route::get('/searchgroups', 'NotesController@groups');

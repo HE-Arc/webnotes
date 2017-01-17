@@ -1,6 +1,12 @@
 /**
  * Created by nicolas on 30.11.16.
  */
+$(function(){
+    $('.profile-usermenu li').click(function(){
+        $('.profile-usermenu ul li').removeClass('active');
+        $(this).addClass('active');
+    });
+});
 
 function getOverview(id){
     $.ajax({

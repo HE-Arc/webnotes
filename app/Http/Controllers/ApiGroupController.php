@@ -2,9 +2,16 @@
 
 namespace WebNote\Http\Controllers;
 
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 use WebNote\Http\Requests;
+
+use WebNote;
+
+use WebNote\Group;
+use WebNote\User;
 
 class ApiGroupController extends Controller
 {
@@ -20,7 +27,7 @@ class ApiGroupController extends Controller
      */
     public function index()
     {
-        //
+        return Response::json(WebNote\Group::all());
     }
 
     /**
@@ -52,7 +59,7 @@ class ApiGroupController extends Controller
      */
     public function show($id)
     {
-        //
+        return Response::json(WebNote\Group::find($id));
     }
 
     /**
@@ -87,5 +94,14 @@ class ApiGroupController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     *
+     */
+    public function users($id)
+    {
+      $group = WebNote\Group::find($id);
+      return Response::json($group->members);
     }
 }
