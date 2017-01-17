@@ -63,7 +63,10 @@ class User extends Authenticatable
     }
 
     public function canModifyNote($id) {
-        return $this->belongsToMany('WebNote\Note')->withPivot('permission')->find($id)->pivot->permission;
+        if($this->belongsToMany('WebNote\Note')->withPivot('permission')->find($id) != null) {
+            return $this->belongsToMany('WebNote\Note')->withPivot('permission')->find($id)->pivot->permission;
+        }
+        return 0;
     }
 
     public function lastNote(){
