@@ -82,7 +82,11 @@ class ApiGroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      // Update the group
+      $group = WebNote\Group::find($id);
+      $group->update($request->all());
+      $group->save();
+      return Response::json($request);
     }
 
     /**

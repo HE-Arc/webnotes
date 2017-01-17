@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> 44219bdf51158895f48d85f7afc3ac73f9147c53
 <h1>Paramètre du compte {{ Auth::user()->name }}</h1>
 <p>Cette section vous permet de modifier les champs que vous désirez: </p>
 <form action="{{ url("/account/".Auth::user()->id) }}" class="form-horizontal" method="post" enctype="multipart/form-data">
@@ -51,9 +47,6 @@
         </div>
     </div>
 </form>
-<<<<<<< HEAD
-<script src="js/app.js"></script>
-=======
 <script>
     /* ICON UPLOADER */
     $("#icon-edit").click(function () {
@@ -71,5 +64,3 @@
         reader.readAsDataURL(file);
     });
 </script>
->>>>>>> 44219bdf51158895f48d85f7afc3ac73f9147c53
-
