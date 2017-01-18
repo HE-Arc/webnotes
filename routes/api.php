@@ -13,13 +13,16 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:api');
+// Route::get('/user', function (Request $request) {
+//     return $request->user();
+// })->middleware('auth:api');
 
 
-Route::resource('/group', 'ApiGroupController');
+Route::get('/user', 'ApiAccountController@index');
 
+Route::get('/group', 'ApiGroupController@index');
+Route::get('/group/{group}', 'ApiGroupController@show');
 Route::get('/group/{group}/users', 'ApiGroupController@users');
+Route::post('/group/{group}', 'ApiGroupController@update');
 
 Route::resource('apiAccount', 'ApiAccountController');

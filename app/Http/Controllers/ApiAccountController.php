@@ -2,7 +2,7 @@
 
 namespace WebNote\Http\Controllers;
 
-use Illuminate\Auth\Access\Response;
+// use Illuminate\Auth\Access\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
