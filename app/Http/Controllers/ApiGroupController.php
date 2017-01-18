@@ -82,12 +82,22 @@ class ApiGroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-      file_put_contents("log.txt", $request->all()); // Debug ./public/log.txt
+      // Validation
+      $this->validate($request, [
+          'name'              => 'required',
+          'members'           => 'required'
+      ]);
+
       // Update the group
-      // $group = WebNote\Group::find($id);
-      // $group->update($request->all());
-      // $group->save();
-      // return Response::json($request);
+      $group = WebNote\Group::find($id);
+      $group->update($request->all());
+      $group->members()->detach();
+      foreach ($request->members as $mid)
+      {
+          $group->members()->attach($mid, ['permission' => 1]);
+      }
+      $group->save();
+      return response()->json($request);
     }
 
     /**
