@@ -24,6 +24,7 @@ Route::get('/group', 'ApiGroupController@index');
 Route::get('/group/{group}', 'ApiGroupController@show');
 Route::get('/group/{group}/users', 'ApiGroupController@users');
 Route::post('/group/{group}', 'ApiGroupController@update');
+Route::post('/group/{group}/addUser', 'ApiGroupController@addUser');
 
 Route::get('/note', 'ApiNotesController@index');
 //Route::get('/note/{note}', 'ApiNotesController@show');

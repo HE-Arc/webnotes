@@ -92,7 +92,7 @@ class ApiGroupController extends Controller
       $group = WebNote\Group::find($id);
       $group->update($request->all());
       $icon = null;
-      if ($request->file('icon') != "") {
+      if ($request->hasFile('icon')) {
           $icon = $request->file('icon')->store('groups_icon', 'public');
       }
       $group->icon = $icon;
@@ -123,5 +123,20 @@ class ApiGroupController extends Controller
     {
       $group = WebNote\Group::find($id);
       return Response::json($group->members);
+    }
+
+    /**
+     *
+     */
+    public function addUser(Request $request, $id)
+    {
+      // Validation
+      $this->validate($request, [
+          'member'           => 'required'
+      ]);
+      $group = WebNote\Group::find($id);
+      $group->members()->attach($request->member, ['permission' => 1]);
+      $group->save();
+      return response()->json($request);
     }
 }
