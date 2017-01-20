@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\DomCrawler\AbstractUriElement;
 use WebNote\Http\Requests;
+use WebNote;
+use WebNote\User;
 
 class ApiNotesController extends Controller
 {
@@ -18,7 +20,7 @@ class ApiNotesController extends Controller
      */
     public function index()
     {
-        //
+        return Response::json(WebNote\Note::all());
     }
 
     /**
@@ -85,5 +87,10 @@ class ApiNotesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function notes($id){
+        $user = WebNote\User::find($id);
+        return Response::json($user->notes);
     }
 }

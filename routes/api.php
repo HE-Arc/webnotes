@@ -22,4 +22,7 @@ Route::resource('/group', 'ApiGroupController');
 
 Route::get('/group/{group}/users', 'ApiGroupController@users');
 
+Route::resource('/note', 'ApiNotesController');
+Route::get('/note/{user}/notes');
+
 Route::resource('apiAccount', 'ApiAccountController');
