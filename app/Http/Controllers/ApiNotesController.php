@@ -2,6 +2,7 @@
 
 namespace WebNote\Http\Controllers;
 
+use Illuminate\Auth\Access\Response;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,7 @@ class ApiNotesController extends Controller
      */
     public function index()
     {
+        //return Response::json(WebNote\User::find($id)->notes);
         return Response::json(WebNote\Note::all());
     }
 
@@ -52,7 +54,7 @@ class ApiNotesController extends Controller
      */
     public function show($id)
     {
-        //
+        return Response::json(WebNote\Note::find($id))->release();
     }
 
     /**
@@ -75,7 +77,19 @@ class ApiNotesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Validation
+        $this->validate($request, [
+            'name'              => 'required',
+            'members'           => 'required'
+        ]);
+
+        // Update the group
+        $note = WebNote\Note::find($id);
+        $note->update($request->all());
+
+
+        $note->save();
+        return response()->json($request);
     }
 
     /**

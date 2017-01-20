@@ -74,8 +74,8 @@
                                 <strong>Titre et description de la dernière note:</strong>
                                 <div class="panel-heading">
                                     <h3>
-                                        {{ Auth::user()->lastNote()->title }}<br/>
-                                        <small>{{ Auth::user()->lastNote()->description }}</small><br/>
+                                        {{ Auth::user()->lastNote() }}<br/>
+                                        <small>{{ Auth::user()->lastNote() }}</small><br/>
                                     </h3>
                                 </div>
                                 <strong>Vous avez écrit {{count(Auth::user()->notes)}} note(s)</strong>

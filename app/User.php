@@ -76,4 +76,9 @@ class User extends Authenticatable
     public function lastGroup(){
         return Group::all()->last();
     }
+
+    public function poil(){
+        return print("Poil");
+        //return $this->lastNote()->title;
+    }
 }
