@@ -19,8 +19,10 @@ use Illuminate\Http\Request;
 
 
 Route::get('/user', 'ApiAccountController@index');
+Route::post('/user/authUser', 'ApiAccountController@authUser');
+Route::get('/user/{user}/groups', 'ApiAccountController@groups');
+Route::get('/user/{user}/notes', 'ApiAccountController@notes');
 
-Route::get('/group', 'ApiGroupController@index');
 Route::get('/group/{group}', 'ApiGroupController@show');
 Route::get('/group/{group}/users', 'ApiGroupController@users');
 Route::post('/group/{group}', 'ApiGroupController@update');
@@ -28,6 +30,5 @@ Route::post('/group/{group}/addUser', 'ApiGroupController@addUser');
 
 Route::get('/note', 'ApiNotesController@index');
 //Route::get('/note/{note}', 'ApiNotesController@show');
-//Route::get('/note/{user}/notes', 'ApiNotesController@notes');
 
 Route::resource('apiAccount', 'ApiAccountController');

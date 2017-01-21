@@ -20,7 +20,7 @@ class ApiAccountController extends Controller
      */
     public function index()
     {
-        return Response::json(WebNote\User::all());
+        return response()->json(WebNote\User::all());
     }
 
     /**
@@ -52,7 +52,7 @@ class ApiAccountController extends Controller
      */
     public function show($id)
     {
-      return Response::json(WebNote\User::find($id));
+      return response()->json(WebNote\User::find($id));
     }
 
     /**
@@ -92,5 +92,24 @@ class ApiAccountController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function groups($id)
+    {
+      return response()->json(WebNote\User::find($id)->groups()->get());
+    }
+
+    public function notes($id){
+        $notes = WebNote\User::find($id)->notes()->get();
+        foreach (WebNote\User::find($id)->groups() as $key => $value) {
+          $notes = $notes->merge($value->groups()->get());
+        }
+        return Response::json($notes);
+    }
+
+    public function authUser(Request $request)
+    {
+      $user = WebNote\User::where([['email', '=', $request->email],['name', '=', $request->name]])->first();
+      return response()->json($user);
     }
 }

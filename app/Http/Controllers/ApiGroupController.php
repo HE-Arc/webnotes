@@ -27,7 +27,7 @@ class ApiGroupController extends Controller
      */
     public function index()
     {
-        return Response::json(WebNote\Group::all());
+        return response()->json(WebNote\Group::all());
     }
 
     /**
@@ -59,7 +59,7 @@ class ApiGroupController extends Controller
      */
     public function show($id)
     {
-        return Response::json(WebNote\Group::find($id));
+        return response()->json(WebNote\Group::find($id));
     }
 
     /**
@@ -122,7 +122,7 @@ class ApiGroupController extends Controller
     public function users($id)
     {
       $group = WebNote\Group::find($id);
-      return Response::json($group->members);
+      return response()->json($group->members);
     }
 
     /**
