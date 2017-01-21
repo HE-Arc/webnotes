@@ -112,4 +112,16 @@ class ApiAccountController extends Controller
       $user = WebNote\User::where([['email', '=', $request->email],['name', '=', $request->name]])->first();
       return response()->json($user);
     }
+
+    public function uploadAvatar(Request $request, $id)
+    {
+      $user = WebNote\User::find($id);
+      $avatar = null;
+      if ($request->hasFile('avatar')) {
+          $avatar = $request->file('avatar')->store('users_avatar', 'public');
+      }
+      $user->avatar = $avatar;
+      $user->save();
+      return response()->json($request);
+    }
 }

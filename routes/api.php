@@ -19,9 +19,10 @@ use Illuminate\Http\Request;
 
 
 Route::get('/user', 'ApiAccountController@index');
-Route::post('/user/authUser', 'ApiAccountController@authUser');
 Route::get('/user/{user}/groups', 'ApiAccountController@groups');
 Route::get('/user/{user}/notes', 'ApiAccountController@notes');
+Route::post('/user/authUser', 'ApiAccountController@authUser');
+Route::post('/user/{user}/avatar', 'ApiAccountController@uploadAvatar');
 
 Route::get('/group/{group}', 'ApiGroupController@show');
 Route::get('/group/{group}/users', 'ApiGroupController@users');
