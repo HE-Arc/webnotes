@@ -13,23 +13,20 @@ use Illuminate\Http\Request;
 |
 */
 
-// Route::get('/user', function (Request $request) {
-//     return $request->user();
-// })->middleware('auth:api');
-
 
 Route::get('/user', 'ApiAccountController@index');
 Route::get('/user/{user}/groups', 'ApiAccountController@groups');
 Route::get('/user/{user}/notes', 'ApiAccountController@notes');
 Route::post('/user/authUser', 'ApiAccountController@authUser');
-Route::post('/user/{user}/avatar', 'ApiAccountController@uploadAvatar');
+Route::post('/user/{user}', 'ApiAccountController@update');
 
 Route::get('/group/{group}', 'ApiGroupController@show');
 Route::get('/group/{group}/users', 'ApiGroupController@users');
+Route::post('/group', 'ApiGroupController@store');
 Route::post('/group/{group}', 'ApiGroupController@update');
 Route::post('/group/{group}/addUser', 'ApiGroupController@addUser');
 
 Route::get('/note', 'ApiNotesController@index');
-//Route::get('/note/{note}', 'ApiNotesController@show');
-
-Route::resource('apiAccount', 'ApiAccountController');
+Route::get('/note/{note}', 'ApiNotesController@show');
+Route::post('/note/{note}', 'ApiNotesController@update');
+Route::post('/note', 'ApiNotesController@store');

@@ -11,6 +11,7 @@ use Symfony\Component\DomCrawler\AbstractUriElement;
 use WebNote\Http\Requests;
 use WebNote;
 use WebNote\User;
+use WebNote\Note;
 
 class ApiNotesController extends Controller
 {
@@ -21,8 +22,7 @@ class ApiNotesController extends Controller
      */
     public function index()
     {
-        //return Response::json(WebNote\User::find($id)->notes);
-        return Response::json(WebNote\Note::all());
+        return response()->json(WebNote\Note::all());
     }
 
     /**
@@ -43,7 +43,20 @@ class ApiNotesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      // Validation
+      $this->validate($request, [
+          'title'             => 'required',
+          'member'           => 'required'
+      ]);
+
+      $note = new WebNote\Note($request->all());
+      $note->save();
+
+      $note->releases()->create($request->all());
+
+      $note->users()->attach($request->member, ['permission' => 1]);
+
+      return response()->json($request);
     }
 
     /**
@@ -54,7 +67,7 @@ class ApiNotesController extends Controller
      */
     public function show($id)
     {
-        return Response::json(WebNote\Note::find($id))->release();
+        return response()->json(WebNote\Note::find($id)->release());
     }
 
     /**
@@ -77,18 +90,17 @@ class ApiNotesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Validation
-        $this->validate($request, [
-            'name'              => 'required',
-            'members'           => 'required'
-        ]);
 
         // Update the group
-        $note = WebNote\Note::find($id);
-        $note->update($request->all());
+        $release = WebNote\NoteRelease::find($id);
+        $note = WebNote\Note::find($release->note_id);
 
+        $values = $request->all();
+        $values['auteur'] = $note->auteur;
+        $values['title'] = $note->title;
+        $values['description'] = $note->description;
+        $note->releases()->create($values);
 
-        $note->save();
         return response()->json($request);
     }
 
@@ -101,10 +113,5 @@ class ApiNotesController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function notes($id){
-        $user = WebNote\User::find($id);
-        return Response::json($user->notes);
     }
 }

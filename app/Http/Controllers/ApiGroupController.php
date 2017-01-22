@@ -48,7 +48,27 @@ class ApiGroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      // Validation
+      $this->validate($request, [
+          'name'              => 'required',
+          'member'           => 'required'
+      ]);
+
+      // Create the group
+      $group = new Group($request->all());
+
+      $icon = null;
+      if ($request->hasFile('icon')) {
+          $icon = $request->file('icon')->store('groups_icon', 'public');
+      }
+      $group->icon = $icon;
+
+      $group->save();
+
+      $group->members()->attach($request->member, ['permission' => 1]);
+
+
+      return response()->json($request);
     }
 
     /**

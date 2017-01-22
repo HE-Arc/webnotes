@@ -36,4 +36,9 @@ class Note extends Model
         return $this->hasMany('WebNote\NoteRelease')->orderBy('updated_at', 'desc');
     }
 
+    public function release()
+    {
+        return $this->hasMany('WebNote\NoteRelease')->orderBy('updated_at', 'desc')->first();
+    }
+
 }
