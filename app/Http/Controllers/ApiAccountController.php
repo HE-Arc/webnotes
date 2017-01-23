@@ -91,7 +91,7 @@ class ApiAccountController extends Controller
       }
       $user->avatar= $avatar;
       $user->save();
-      return response()->json($request);
+      return response()->json($user);
     }
 
     /**
@@ -115,7 +115,7 @@ class ApiAccountController extends Controller
         foreach (WebNote\User::find($id)->groups() as $key => $value) {
           $notes = $notes->merge($value->groups()->get());
         }
-        return Response::json($notes);
+        return response()->json($notes);
     }
 
     public function authUser(Request $request)
